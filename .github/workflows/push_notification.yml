@@ -27,7 +27,7 @@ jobs:
           commit_hash=$(git log -1 --format="%H")
           commit_repo=${{ github.event.repository.name }}
           commit_branch_name=${GITHUB_REF#refs/heads/}
-          commit_link="https://github.com/LOG2440-20233/$commit_repo/commit/$commit_hash"
+          commit_link="https://github.com/thomas-rou/$commit_repo/commit/$commit_hash"
 
           curl \
           -F "payload_json={\"content\": \"$commit_author has pushed a new commit to the $commit_branch_name branch!\n\nRepo name: $commit_repo\nCommit message: $commit_message\nCommit link: [here]($commit_link)\"}" \

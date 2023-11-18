@@ -21,7 +21,7 @@ jobs:
     
       - name: Send Discord notification
         run: |
-          webhook_url="https://discord.com/api/webhooks/1150159331380183150/yO4RZ3Wrz3_5_ICCUwx2OpLmuoZJdzz-WMRRZD70-jYbmpmj1eChTjpdOKORcdJtaJE0"
+          webhook_url="https://discord.com/api/webhooks/1175535036691394630/ou2Ja61Z98LLU4C5AfGX6OmmG1xzVlJ5fCvpHTv93yjGhhZrRclgkIUCgJM73ZcYqKA3"
           commit_message=$(git log -1 --pretty=format:"%s")
           commit_author=$(git log -1 --format="%an")
           commit_hash=$(git log -1 --format="%H")

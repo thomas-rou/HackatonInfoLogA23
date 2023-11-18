@@ -29,6 +29,6 @@ jobs:
           commit_branch_name=${GITHUB_REF#refs/heads/}
           commit_link="https://github.com/thomas-rou/$commit_repo/commit/$commit_hash"
 
-          curl \
-          -F "payload_json={\"content\": \"$commit_author has pushed a new commit to the $commit_branch_name branch!\n\nRepo name: $commit_repo\nCommit message: $commit_message\nCommit link: [here]($commit_link)\"}" \
-          $webhook_url
+        curl \
+        -F "payload_json={\"content\": \"$commit_author has pushed a new commit to the $commit_branch_name branch!\n\nRepo name: $commit_repo\nCommit message: $commit_message\nCommit link: <$commit_link>\"}" \
+        $webhook_url

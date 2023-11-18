@@ -1,0 +1,35 @@
+name: Discord Webhook Notification
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  send-notification:
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+    
+      - name: Send Discord notification
+        run: |
+          webhook_url="https://discord.com/api/webhooks/1150159331380183150/yO4RZ3Wrz3_5_ICCUwx2OpLmuoZJdzz-WMRRZD70-jYbmpmj1eChTjpdOKORcdJtaJE0"
+          commit_message=$(git log -1 --pretty=format:"%s")
+          commit_author=$(git log -1 --format="%an")
+          commit_hash=$(git log -1 --format="%H")
+          commit_repo=${{ github.event.repository.name }}
+          commit_branch_name=${GITHUB_REF#refs/heads/}
+          commit_link="https://github.com/LOG2440-20233/$commit_repo/commit/$commit_hash"
+
+          curl \
+          -F "payload_json={\"content\": \"$commit_author has pushed a new commit to the $commit_branch_name branch!\n\nRepo name: $commit_repo\nCommit message: $commit_message\nCommit link: [here]($commit_link)\"}" \
+          -F "file1=@.github/workflows/LOG2440.png" \
+          $webhook_url

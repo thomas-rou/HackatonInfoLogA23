@@ -65,7 +65,7 @@ function handleEndFight() {
   document.body.appendChild(label);
 
   setTimeout(function () {
-    window.location.href = 'index.html';
+    window.location.href = 'mainGame.html';
   }, 3000); // 5000 milliseconds = 5 seconds
 
 }

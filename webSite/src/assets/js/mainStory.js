@@ -33,6 +33,7 @@ window.onload = function() {
         document.body.removeChild(storyText);
         document.body.removeChild(skipButton);
         document.getElementById('main-img').classList.remove('filter');
+        addClickEventToMainImage();
     });
 
     // Append the skip button to the body
@@ -73,6 +74,7 @@ window.onload = function() {
     setTimeout(function() {
         document.body.removeChild(storyText);
         document.body.removeChild(skipButton);
+        addClickEventToMainImage();
     }, 15000); // Adjust the duration as needed
 };
 
@@ -84,3 +86,12 @@ function updateClock() {
     clock.textContent = timeString;
     startTime.setMinutes(startTime.getMinutes() + 1);
 }
+
+// Function to add a click event listener to the main image
+function addClickEventToMainImage() {
+    let mainImg = document.getElementById('main-img');
+    mainImg.addEventListener('click', function() {
+        window.location.href = 'typing.html';
+    });
+}
+

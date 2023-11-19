@@ -15,33 +15,24 @@ body {
     margin: 0;
 }
 
-#ratio-text1,
-#ratio-text2,
-#ratio-text3,
-#ratio-text4 {
+#container {
     position: fixed;
+    display: flex;
+    justify-content: space-between;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.side-containers  {
+    height : 100%;
+    width: 60px;
+    display: flex;
+    align-items: center;
     color: white;
-    padding: 10px;
 }
 
-#ratio-text1 {
-    left: 50%;
-    transform: translate(-50%, 0);
-}
-
-#ratio-text2 {
-    left: 50%;
-    bottom: 0;
-    transform: translate(-50%, 0);
-}
-
-#ratio-text3 {
-    top: 50%;
-    transform: translate(0, -50%);
-}
-
-#ratio-text4 {
-    top: 50%;
-    right: 0;
-    transform: translate(0, -50%);
+.side-containers div  {
+    width: 100%;
+    text-align: center;
 }

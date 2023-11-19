@@ -77,6 +77,7 @@ window.onload = function() {
         document.body.removeChild(storyText);
         document.body.removeChild(skipButton);
         addClickEventToMainImage();
+        window.location.href = 'mainGame.html'        
     }, STORY_DURATION); // Adjust the duration as needed
 };
 

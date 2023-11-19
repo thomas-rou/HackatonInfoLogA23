@@ -9,6 +9,20 @@ document.addEventListener("DOMContentLoaded", function() {
     storyElement.classList.add("story");
     overlay.appendChild(storyElement);
 
+    const backgroundMusic = document.createElement("audio");
+    backgroundMusic.id = "backgroundMusic";
+    backgroundMusic.loop = true;
+    document.body.appendChild(backgroundMusic);
+
+    const sourceElement = document.createElement("source");
+    sourceElement.src = "/assets/audio/Rafael_Archangel_-_17_-_Sleep_Time.mp3";
+    sourceElement.type = "audio/mp3";
+    backgroundMusic.appendChild(sourceElement);
+
+    const audioControl = document.createElement("div");
+    audioControl.id = "audioControl";
+    overlay.appendChild(audioControl);
+
     // Define the story sentences
     const storySentences = [
         "Once upon a time, as the snow gently covered the streets of the city of Montreal,",
@@ -28,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const wordAppearTime = 500;
     const sentenceFadeOutTime = 2000;
     const storyFadeOutTime = 2000;
+    const storyFadeInTime = 2000;
     const skipButtonFadeOutTime = 1000;
 
     function showNextLetter(words, storyElement) {
@@ -125,21 +140,61 @@ document.addEventListener("DOMContentLoaded", function() {
         return skipButton;
     }
 
-    const skipButton = addSkipButton();
-    document.addEventListener("mousemove", function() {
-        skipButton.classList.add('show');
-        setTimeout(() => {
-            skipButton.classList.remove('show');
-        }, skipButtonFadeOutTime);
-    });
+    function addPlayButton() {
+        const playButton = document.createElement("button");
+        playButton.id = "playButton";
+        playButton.textContent = "Play music";
+        playButton.classList.add("playButton");
+        playButton.addEventListener("click", function () {
+            backgroundMusic.play();
+            playButton.remove();
+        });
+        audioControl.appendChild(playButton);
+        return playButton;
+    }
 
-    document.addEventListener("click", function(event) {
-        // Only call skipToNextAnimation if the event's target was not the skipButton
-        if (event.target !== skipButton) {
-            skipToNextAnimation();
-        }
-    });
+    function addMuteButton() {
+        const muteButton = document.createElement("button");
+        muteButton.id = "muteButton";
+        muteButton.textContent = "Mute";
+        muteButton.classList.add("muteButton");
+        muteButton.addEventListener("click", function () {
+            if (backgroundMusic.volume === 0) {
+                backgroundMusic.volume = 1;
+                muteButton.textContent = "Mute";
+            } else {
+                backgroundMusic.volume = 0;
+                muteButton.textContent = "Unmute";
+            }
+        });
+        audioControl.appendChild(muteButton);
+        return muteButton;
+    }
 
-    showNextSentence();
+
+    overlay.classList.add("overlayFadeIn");
+    setTimeout(() => {
+        overlay.classList.remove("overlayFadeIn");
+        const muteButton = addMuteButton();
+        const playButton = addPlayButton();
+        const skipButton = addSkipButton();
+        document.addEventListener("mousemove", function() {
+            skipButton.classList.add('show');
+            muteButton.classList.add('show');
+            setTimeout(() => {
+                skipButton.classList.remove('show');
+                muteButton.classList.remove('show');
+            }, skipButtonFadeOutTime);
+        });
+
+        document.addEventListener("click", function(event) {
+            // Only call skipToNextAnimation if the event's target was not the skipButton
+            if (event.target !== skipButton && event.target !== muteButton && event.target !== playButton) {
+                skipToNextAnimation();
+            }
+        });
+
+        showNextSentence();
+    }, storyFadeInTime);
 });
 

@@ -2,14 +2,14 @@
     --main-bg: black;
     --main-color: white;
     --dark-grey: rgb(101, 101, 101);
-    --container-bg: #262626;
+    --light-purple: #bd66dd;
     --highlight-color: #E50914;
     --call-to-action: aqua;
     --positive-correspondance: green;
 }
 
 body {
-    background-color: #f2f2f2;
+    background-color:var(--main-bg);
     font-family: Arial, sans-serif;
 }
 
@@ -56,7 +56,6 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.8);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,19 +65,30 @@ h1 {
 
 #logo {
     height: 75vh;
+    animation: fadeIn 2s ease-in-out;
 }
 
 .spinner {
+    opacity: 0;
     border: 8px solid;
-    border-color: --dark-grey;
-    border-top: 8px solid #3498db;
+    border-color: var(--dark-grey);
+    border-top: 8px solid var(--light-purple);
     border-radius: 50%;
     width: 8vw;
     height: 8vw;
-    animation: spin 1s linear infinite;
+    animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

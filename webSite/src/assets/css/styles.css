@@ -13,6 +13,14 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.pageCenter{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
     width: 400px;
     margin: 0 auto;
@@ -20,6 +28,7 @@ body {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 h1 {

@@ -3,6 +3,8 @@ startTime.setHours(20);
 startTime.setMinutes(0);
 startTime.setSeconds(0);
 
+const STORY_DURATION = 5 * 1000;
+
 window.onload = function() {
     // Progressive darkening animation
     document.body.classList.add('darken');
@@ -55,14 +57,14 @@ window.onload = function() {
     setTimeout(function() {
         document.getElementById('story-text').classList.add('fade-out');
         document.getElementById('skip-button').classList.add('fade-out');
-    }, 14000); // Adjust the duration as needed
+    }, STORY_DURATION - 1000); // Adjust the duration as needed
 
     // Progressive return animation
     setTimeout(function() {
         document.body.classList.remove('darken');
         document.body.removeChild(storyText);
         document.body.removeChild(skipButton);
-    }, 15000); // Adjust the duration as needed
+    }, STORY_DURATION); // Adjust the duration as needed
 };
 
 // Function to update the clock display

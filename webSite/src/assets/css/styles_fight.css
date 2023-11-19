@@ -2,7 +2,7 @@
 body {
     text-align: center;
     margin: 0;
-    color: rgb(195, 188, 202);
+    color: #FFFFF4;
     border: 15px solid black; 
 }
 
@@ -40,7 +40,7 @@ header, footer, article, nav, aside {
     padding: 1em;
 }
 header, footer {
-    background: rgb(66, 0, 128);
+    background: #7209B7;
     height: 10vh;
     display: flex;
     align-items: center;
@@ -86,8 +86,8 @@ h2 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(0, 191, 255);
-    border: 5px solid rgb(0, 56, 139);
+    background-color: #4CC9F0;
+    border: 5px solid #3A0CA3;
 
     color: #fff;
     text-align: center;

@@ -36,7 +36,7 @@ function turnKeysToWhite() {
 function turnKeyToGold() {
   const firstChar = targetWord.charAt(0).toLocaleUpperCase();
   if( document.getElementById(firstChar)){
-    document.getElementById(firstChar).style.backgroundColor = "gold";
+    document.getElementById(firstChar).style.backgroundColor = "#FFBE0B";
   }
 }
 

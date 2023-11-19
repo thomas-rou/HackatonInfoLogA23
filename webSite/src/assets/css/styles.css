@@ -65,30 +65,48 @@ h1 {
 
 #logo {
     height: 75vh;
-    animation: fadeIn 2s ease-in-out;
 }
 
 .spinner {
     opacity: 0;
     border: 8px solid;
     border-color: var(--dark-grey);
-    border-top: 8px solid var(--light-purple);
     border-radius: 50%;
-    width: 8vw;
-    height: 8vw;
-    animation: spin 1.5s linear infinite;
+    width: 50px;
+    height: 50px;
+    transform: rotate(45deg);
+    animation: colorChange 7s linear 1;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
+@keyframes colorChange {
+    0%, 100% {
+        border-top: 8px solid var(--light-purple);
+        border-right: 8px solid var(--light-purple);
+        border-bottom: 8px solid var(--light-purple);
+        border-left: 8px solid var(--light-purple);
     }
-    to {
-        opacity: 1;
+    20% {
+        border-top: 8px solid var(--dark-grey);
+        border-right: 8px solid var(--dark-grey);
+        border-bottom: 8px solid var(--dark-grey);
+        border-left: 8px solid var(--dark-grey);
+    }
+    40% {
+        border-top: 8px solid var(--light-purple);
+        border-right: 8px solid var(--dark-grey);
+        border-bottom: 8px solid var(--dark-grey);
+        border-left: 8px solid var(--dark-grey);
+    }
+    60% {
+        border-top: 8px solid var(--light-purple);
+        border-right: 8px solid var(--light-purple);
+        border-bottom: 8px solid var(--dark-grey);
+        border-left: 8px solid var(--dark-grey);
+    }
+    80% {
+        border-top: 8px solid var(--light-purple);
+        border-right: 8px solid var(--light-purple);
+        border-bottom: 8px solid var(--light-purple);
+        border-left: 8px solid var(--dark-grey);
     }
 }

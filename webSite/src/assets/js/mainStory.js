@@ -1,3 +1,4 @@
+
 let startTime = new Date();
 startTime.setHours(20);
 startTime.setMinutes(0);
@@ -6,8 +7,12 @@ startTime.setSeconds(0);
 const STORY_DURATION = 5 * 1000;
 
 window.onload = function() {
-    // Progressive darkening animation
-    document.body.classList.add('darken');
+
+    // Create the main Img element
+    let mainImg = document.createElement('img');
+    mainImg.id = 'main-img';
+    mainImg.src = 'assets/png/garage/garage_1_light.png';
+    document.body.appendChild(mainImg);
 
     // Create the story-text element
     let storyText = document.createElement('div');
@@ -26,11 +31,10 @@ window.onload = function() {
     skipButton.id = 'skip-button';
     skipButton.textContent = 'Skip';
     skipButton.addEventListener('click', function() {
-        // Remove the story-text element and skip button
+        // Remove the story-text element, skip button, and main div
         document.body.removeChild(storyText);
         document.body.removeChild(skipButton);
-        // Remove the darken class to return the window to normal
-        document.body.classList.remove('darken');
+        document.getElementById('main-img').classList.remove('filter');
     });
 
     // Append the skip button to the body
@@ -47,21 +51,28 @@ window.onload = function() {
     // Update the clock every minute
     setInterval(updateClock, 60000);
 
+    // Fade in animation for main image
+    setTimeout(function() {
+        document.getElementById('main-img').classList.add('fade-in');
+        document.getElementById('clock').classList.add('fade-in');
+    }, 500);
+
     // Fade in animation for story text
     setTimeout(function() {
         document.getElementById('story-text').classList.add('fade-in');
         document.getElementById('skip-button').classList.add('fade-in');
-    }, 1000); // Adjust the delay as needed
+        document.getElementById('main-img').classList.add('filter');
+    }, 1000);
 
     // Fade out animation for story text
     setTimeout(function() {
         document.getElementById('story-text').classList.add('fade-out');
         document.getElementById('skip-button').classList.add('fade-out');
+        document.getElementById('main-img').classList.remove('filter');
     }, STORY_DURATION - 1000); // Adjust the duration as needed
 
     // Progressive return animation
     setTimeout(function() {
-        document.body.classList.remove('darken');
         document.body.removeChild(storyText);
         document.body.removeChild(skipButton);
     }, STORY_DURATION); // Adjust the duration as needed

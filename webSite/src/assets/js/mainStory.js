@@ -1,100 +1,145 @@
 
-let startTime = new Date();
-startTime.setHours(20);
-startTime.setMinutes(0);
-startTime.setSeconds(0);
+document.addEventListener("DOMContentLoaded", function() {
+    // Create overlay
+    const overlay = document.createElement("div");
+    overlay.classList.add("overlay");
+    document.body.appendChild(overlay);
 
-const STORY_DURATION = 5 * 1000;
+    const storyElement = document.createElement("div");
+    storyElement.classList.add("story");
+    overlay.appendChild(storyElement);
 
-window.onload = function() {
+    // Define the story sentences
+    const storySentences = [
+        "Once upon a time, as the snow gently covered the streets of the city of Montreal,",
+        "a young child discovered a strange phenomenon in his own house.",
+        "Mysterious sounds echoed through the dark hallways,",
+        "and fleeting shadows danced in the forgotten corners.",
+        "The child then set out to investigate the origin of these nocturnal disturbances.",
+        "Armed with his tenacity and ingenious spirit,",
+        "he set out to chase away the mysterious monsters hiding in the corners of his home."
+    ];
 
-    // Create the main Img element
-    let mainImg = document.createElement('img');
-    mainImg.id = 'main-img';
-    mainImg.src = 'assets/png/garage/garage_1_light.png';
-    document.body.appendChild(mainImg);
+    let sentenceIndex = 0;
+    let wordIndex = 0;
+    let letterIndex = 0;
+    let sentenceTimeoutId = null;
+    const letterAppearTime = 50;
+    const wordAppearTime = 500;
+    const sentenceFadeOutTime = 2000;
+    const storyFadeOutTime = 2000;
+    const skipButtonFadeOutTime = 1000;
 
-    // Create the story-text element
-    let storyText = document.createElement('div');
-    storyText.id = 'story-text';
-    storyText.textContent = 'Il était une fois, alors que la neige recouvrait doucement les rues de la ville de Montréal,' +
-    ' un jeune enfant découvrit un étrange phénomène dans sa propre maison. \n' +
-    'Des bruits mystérieux résonnaient à travers les couloirs sombres, et des ombres furtives dansaient dans les coins oubliés.\n' +
-    'Il entreprit de rechercher l\'origine de ces perturbations nocturnes.' +
-    'Armé de sa ténacité et de son esprit ingénieux, il entreprit de chasser le mystérieux monstre qui se cachait dans les recoins de sa demeure.';
+    function showNextLetter(words, storyElement) {
+        if (letterIndex < words[wordIndex].length) {
+            const letterElement = document.createElement("span");
+            letterElement.textContent = words[wordIndex][letterIndex];
+            storyElement.appendChild(letterElement);
 
-    // Append the story-text element to the body
-    document.body.appendChild(storyText);
+            letterIndex++;
+            showNextLetter(words, storyElement);
+        } else {
+            storyElement.appendChild(document.createTextNode(" "));
+            wordIndex++;
+            showNextWord(words, storyElement);
+        }
+    }
 
-    // Create the skip button
-    let skipButton = document.createElement('button');
-    skipButton.id = 'skip-button';
-    skipButton.textContent = 'Skip';
-    skipButton.addEventListener('click', function() {
-        // Remove the story-text element, skip button, and main div
-        document.body.removeChild(storyText);
-        document.body.removeChild(skipButton);
-        document.getElementById('main-img').classList.remove('filter');
-        addClickEventToMainImage();
+    function showNextWord(words, storyElement) {
+        if (wordIndex < words.length) {
+            letterIndex = 0;
+            showNextLetter(words, storyElement);
+        } else {
+            setTimeout(() => {
+                storyElement.childNodes.forEach((node, index) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        setTimeout(() => {
+                            node.classList.add("wordAppear");
+                        }, letterAppearTime * index);
+                    }
+                });
+            }, wordAppearTime);
+
+            sentenceTimeoutId = setTimeout(() => {
+                storyElement.classList.add("sentenceDisappear");
+                setTimeout(() => {
+                    storyElement.textContent = "";
+                    storyElement.classList.remove("sentenceDisappear");
+                    sentenceIndex++;
+                    showNextSentence();
+                }, sentenceFadeOutTime/2);
+            }, sentenceFadeOutTime + (letterAppearTime * words.join("").length));
+        }
+    }
+
+    function showNextSentence() {
+        if (sentenceIndex < storySentences.length) {
+            const words = storySentences[sentenceIndex].split(" ");
+            wordIndex = 0;
+            showNextWord(words, storyElement);
+        } else {
+            // reinitialize the story before going to the main game
+            sentenceIndex = 0;
+            wordIndex = 0;
+            letterIndex = 0;
+            clearTimeout(sentenceTimeoutId);
+            overlay.classList.add("overlayFadeOut");
+            setTimeout(() => {
+                window.location.href = 'mainGame.html';
+            }, storyFadeOutTime);
+        }
+    }
+
+    function skipToNextAnimation() {
+        while (storyElement.firstChild) {
+            storyElement.firstChild.remove();
+        }
+        sentenceIndex++;
+        wordIndex = 0; // Reset wordIndex for the next sentence
+        clearTimeout(sentenceTimeoutId);
+        if (sentenceIndex < storySentences.length) {
+            showNextSentence();
+        } else {
+            // reinitialize the story before going to the main game
+            sentenceIndex = 0;
+            wordIndex = 0;
+            letterIndex = 0;
+            clearTimeout(sentenceTimeoutId);
+            overlay.classList.add("overlayFadeOut");
+            setTimeout(() => {
+                window.location.href = 'mainGame.html';
+            }, storyFadeOutTime);
+        }
+    }
+
+    function addSkipButton() {
+        const skipButton = document.createElement("button");
+        skipButton.id = "skipButton";
+        skipButton.textContent = "Skip Story" + "\u2192";
+        skipButton.classList.add("skipButton");
+        skipButton.addEventListener('click', function() {
+            sentenceIndex = storySentences.length + 1;
+            skipToNextAnimation();
+        });
+        overlay.appendChild(skipButton);
+        return skipButton;
+    }
+
+    const skipButton = addSkipButton();
+    document.addEventListener("mousemove", function() {
+        skipButton.classList.add('show');
+        setTimeout(() => {
+            skipButton.classList.remove('show');
+        }, skipButtonFadeOutTime);
     });
 
-    // Append the skip button to the body
-    document.body.appendChild(skipButton);
-
-    // Create the clock element
-    let clock = document.createElement('div');
-    clock.id = 'clock';
-    document.body.appendChild(clock);
-
-    // Call the updateClock function immediately
-    updateClock();
-
-    // Update the clock every minute
-    setInterval(updateClock, 60000);
-
-    // Fade in animation for main image
-    setTimeout(function() {
-        document.getElementById('main-img').classList.add('fade-in');
-        document.getElementById('clock').classList.add('fade-in');
-    }, 500);
-
-    // Fade in animation for story text
-    setTimeout(function() {
-        document.getElementById('story-text').classList.add('fade-in');
-        document.getElementById('skip-button').classList.add('fade-in');
-        document.getElementById('main-img').classList.add('filter');
-    }, 1000);
-
-    // Fade out animation for story text
-    setTimeout(function() {
-        document.getElementById('story-text').classList.add('fade-out');
-        document.getElementById('skip-button').classList.add('fade-out');
-        document.getElementById('main-img').classList.remove('filter');
-    }, STORY_DURATION - 1000); // Adjust the duration as needed
-
-    // Progressive return animation
-    setTimeout(function() {
-        document.body.removeChild(storyText);
-        document.body.removeChild(skipButton);
-        addClickEventToMainImage();
-        window.location.href = 'mainGame.html'        
-    }, STORY_DURATION); // Adjust the duration as needed
-};
-
-// Function to update the clock display
-function updateClock() {
-    let hours = startTime.getHours();
-    let minutes = startTime.getMinutes();
-    let timeString = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-    clock.textContent = timeString;
-    startTime.setMinutes(startTime.getMinutes() + 1);
-}
-
-// Function to add a click event listener to the main image
-function addClickEventToMainImage() {
-    let mainImg = document.getElementById('main-img');
-    mainImg.addEventListener('click', function() {
-        window.location.href = 'typing.html';
+    document.addEventListener("click", function(event) {
+        // Only call skipToNextAnimation if the event's target was not the skipButton
+        if (event.target !== skipButton) {
+            skipToNextAnimation();
+        }
     });
-}
+
+    showNextSentence();
+});
 

@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../../../../figures/9.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.darken {
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color 1s ease;
+}
+
+#story-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#story-text.fade-in {
+    opacity: 1;
+}
+
+#story-text.fade-out {
+    opacity: 0;
+}
+
+#skip-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#skip-button::after {
+    content: '\2192';
+    margin-left: 5px;
+}
+
+#clock {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-family: monospace;
+    font-size: 48px;
+    color: #fff;
+    background-color: #000;
+    padding: 10px;
+    border-radius: 5px;
+}
+

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Game</title>
+  <link rel="stylesheet" href="./assets/css/styles_fight.css">
+  <link rel="stylesheet" href="./assets/css/styles_keyboad.css">
+  <script src="./assets/js/typingGame.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Fight the Monster!</h1>
+    </header>
+    <div id="main">
+        <article>
+            <img src="../../figures/monster/monster_1.png" alt="monster">
+            <h2 id="targetWord"></h2>
+            <h2 id="wordWritten"></h2>
+            <div class="keyboard">
+                <div class="row">
+                  <div class="key key__esc">
+                    <i data-feather="x"></i>
+                  </div>
+                  <div class="key key__symbols">
+                    ! <span> 1
+                  </div>
+                  <div class="key key__symbols">
+                    @ <span> 2
+                  </div>
+                  <div class="key key__symbols">
+                    # <span> 3
+                  </div>
+                  <div class="key key__symbols">
+                    $ <span> 4
+                  </div>
+                  <div class="key key__symbols">
+                    % <span> 5
+                  </div>
+                  <div class="key key__symbols">
+                    ^ <span> 6
+                  </div>
+                  <div class="key key__symbols">
+                    & <span> 7
+                  </div>
+                  <div class="key key__symbols">
+                    * <span> 8
+                  </div>
+                  <div class="key key__symbols">
+                    ( <span> 9
+                  </div>
+                  <div class="key key__symbols">
+                    ) <span> 0
+                  </div>
+                  <div class="key key__symbols">
+                    _ <span> -
+                  </div>
+                  <div class="key key__symbols">
+                    + <span> =
+                  </div>
+                  <div class="key key__delete key__icon">
+                    <i data-feather="delete"></i>
+                  </div>
+                </div>
+                    
+                <div class="row">
+                  <div class="key key__oneandhalf">
+                    <i data-feather="log-in"></i>
+                  </div>
+                  <div id="Q" class="key letter">
+                    Q
+                  </div>
+                  <div id="W" class="key letter">
+                    W
+                  </div>
+                  <div id="E" class="key letter">
+                    E
+                  </div>
+                  <div id="R" class="key letter">
+                    R
+                  </div>
+                  <div id="T" class="key letter">
+                    T
+                  </div>
+                  <div id="Y" class="key letter">
+                    Y
+                  </div>
+                  <div id="U" class="key letter">
+                    U
+                  </div>
+                  <div id="I" class="key letter">
+                    I
+                  </div>
+                  <div id="O" class="key letter">
+                    O
+                  </div>
+                  <div id="P" class="key letter">
+                    P
+                  </div>
+                  <div class="key key__symbols">
+                    { <span> [
+                  </div>
+                  <div class="key key__symbols">
+                    } <span> ]
+                  </div>
+                  <div class="key key__symbols key__oneandhalf">
+                    | <span> \
+                  </div>
+                </div>
+                    
+                <div class="row">
+                  <div class="key key__caps">
+                    <i data-feather="meh"></i>
+                  </div>
+                  <div id="A" class="key letter">
+                    A
+                  </div>
+                  <div id="S" class="key letter">
+                    S
+                  </div>
+                  <div id="D" class="key letter">
+                    D
+                  </div>
+                  <div id="F" class="key letter">
+                    F
+                  </div>
+                  <div id="G" class="key letter">
+                    G
+                  </div>
+                  <div id="H" class="key letter">
+                    H
+                  </div>
+                  <div id="J" class="key letter">
+                    J
+                  </div>
+                  <div id="K" class="key letter">
+                    K
+                  </div>
+                  <div id="L" class="key letter">
+                    L
+                  </div>
+                  <div class="key key__symbols">
+                    : <span> ;
+                  </div>
+                  <div class="key key__symbols">
+                    " <span> '
+                  </div>
+                  <div class="key key__enter">
+                    <i data-feather="corner-down-left"></i>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="key key__shift-left">
+                    <i data-feather="arrow-up-circle"></i>
+                  </div>
+                  <div id="Z" class="key letter">
+                    Z
+                  </div>
+                  <div id="X" class="key letter">
+                    X
+                  </div>
+                  <div id="C" class="key letter">
+                    C
+                  </div>
+                  <div id="V" class="key letter">
+                    V
+                  </div>
+                  <div id="B" class="key letter">
+                    B
+                  </div>
+                  <div id="N" class="key letter">
+                    N
+                  </div>
+                  <div id="M" class="key letter">
+                    M
+                  </div>
+                  <div class="key key__symbols">
+                    > <span> .
+                  </div>
+                  <div class="key key__symbols">
+                    < <span> .
+                  </div>
+                  <div class="key key__symbols">
+                    ? <span> /
+                  </div>
+                  <div class="key">
+                    <i data-feather="arrow-up-circle"></i>
+                  </div>
+                  <div class="key key__arrow">
+                    <i data-feather="arrow-up"></i>
+                  </div>
+                  <div class="key">
+                    <i data-feather="trash-2"></i>
+                  </div>
+                </div>
+                    
+                <div class="row">
+                  <div class="key key__bottom-funct">
+                    ^
+                  </div>
+                  <div class="key key__bottom-funct">
+                    <i data-feather="activity"></i>
+                  </div>
+                  <div class="key key__bottom-funct">
+                    <i data-feather="command"></i>
+                  </div>
+                  <div class="key key__spacebar">
+                  </div>
+                  <div class="key">
+                    <i data-feather="command"></i>
+                  </div>
+                  <div class="key">
+                    <i data-feather="activity"></i>
+                  </div>
+                  <div class="key key__arrow">
+                    <i data-feather="arrow-left"></i>
+                  </div>
+                  <div class="key key__arrow">
+                    <i data-feather="arrow-down"></i>
+                  </div>
+                  <div class="key key__arrow">
+                    <i data-feather="arrow-right"></i>
+                  </div>
+                </div>
+            </div>
+        </article>
+        
+        <nav></nav>
+        <aside></aside>
+
+        <div id="overlay"></div>
+    </div>
+    <footer></footer>
+  </body>
+
+<body>
+  
+  <script>
+
+    // source du keyboard : https://codepen.io/Mickel07/pen/YdONYK
+  </script>
+</body>
+</html>
+

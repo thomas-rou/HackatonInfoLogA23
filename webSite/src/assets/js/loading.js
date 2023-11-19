@@ -9,11 +9,9 @@ async function fadeIn() {
     logo.style.opacity = 0;
 
     for (let opacity = 0; opacity <= 1; opacity += 0.01) {
-        await delay(30); // Adjust the delay as needed
+        await delay(30);
         logo.style.opacity = opacity;
     }
-
-    logo.style.opacity = 1;
 }
 
 async function showSpinner() {
@@ -26,7 +24,7 @@ async function showSpinner() {
 async function fadeOut() {
 
     for (let opacity = 1; opacity >= 0; opacity -= 0.01) {
-        await delay(15); // Adjust the delay as needed
+        await delay(15);
         logo.style.opacity = opacity;
         spinner.style.opacity = opacity;
     }

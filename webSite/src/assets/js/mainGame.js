@@ -149,6 +149,70 @@ async function fetchData() {
     });
 }
 
+function makeDraggable() {
+    const draggableBox = document.getElementById('draggableBox');
+
+    let isDragging = false;
+    let initialObjectXpos, initialXpos;
+    let initialObjectYpos, initialYpos;
+
+    draggableBox.addEventListener('mousedown', (e) => {
+        isDragging = true;
+
+        initialObjectXpos = draggableBox.offsetLeft;
+        initialObjectYpos = draggableBox.offsetTop;
+
+        initialXpos = e.clientX
+        initialYpos = e.clientY
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            const xDiff = e.clientX - initialXpos;
+            const yDiff = e.clientY - initialYpos;
+
+            draggableBox.style.left = `${initialObjectXpos + xDiff}px`;
+            draggableBox.style.top = `${initialObjectYpos + yDiff}px`;
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+}
+
+function makeDraggableRightOnly() {
+    //const draggableBox = document.getElementById('tire');
+    const draggableBox = document.getElementById('draggableBox');
+    //draggableBox.style.left = "100px"
+
+    let isDragging = false;
+    let initialObjectXpos, initialXpos;
+
+    draggableBox.addEventListener('mousedown', (e) => {
+        isDragging = true;
+
+        initialObjectXpos = draggableBox.offsetLeft;
+        initialXpos = e.clientX;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            const xDiff = e.clientX - initialXpos;
+            
+            if (initialObjectXpos + xDiff >= initialObjectXpos) {
+                draggableBox.style.left = `${initialObjectXpos + xDiff}px`;
+            } else { 
+                draggableBox.style.left = `${initialObjectXpos}px`;
+            }
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        draggableBox.style.left = `${initialObjectXpos}px`; // Si le monstre est découvert, ne pas faire?
+    });
+}
 
 // Initial update on page load
 window.onload = () => {
@@ -165,7 +229,13 @@ window.onload = () => {
     .catch(error => {
         console.error('Error in fetchData:', error);
     });
-}
+
+    // Example usage: addMonster with random x and y values between 0 and 100
+    let randomX = Math.random() * 100;
+    let randomY = Math.random() * 100;
+    addMonster(randomX, randomY);
+    makeDraggableRightOnly()
+};
 
 // Update container size on window resize
 window.addEventListener('resize', updateContainerSize);

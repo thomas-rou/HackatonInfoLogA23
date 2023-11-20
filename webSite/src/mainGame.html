@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monster Finder Game</title>
+    <title>Chasseur de monstres</title>
     <link rel="stylesheet" href="assets/css/mainGame.css">
     <script src="assets/json/house.json" defer></script>
     <script src="assets/js/mainGame.js" defer></script>
@@ -11,12 +11,14 @@
 </head>
 <body>
     <img id="img" src="assets/png/garage/0_light.png" alt="Garage Image">
+    <img id="tire" src="assets/png/garage/tire.png">
     <div id="container">
-        <div class="side-containers" onclick="switchView('left')">
-            <div> go left </div>
+        <div id="draggableBox"></div>
+        <div class="side-containers" onclick="switchImage('left')">
+            <div> gauche </div>
         </div>
-        <div class="side-containers" onclick="switchView('right')">
-            <div> go right </div>
+        <div class="side-containers" onclick="switchImage('right')">
+            <div> droite </div>
         </div>
     </div>
 

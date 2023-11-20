@@ -1,12 +1,9 @@
- // inspiration du keyboard : https://codepen.io/Mickel07/pen/YdONYK
+
 const words_array = [
-  "Happy", "Monster", "Sunshine", "Rainbow", "Friendship", "Adventure", "Magic", "Brave", "Laughter", "Teddy",
-  "Castle", "Butterfly", "Cupcake", "Dream", "Smiles", "Treasure", "Unicorn", "Superhero", "Puppy", "Popcorn","Joyful", "Snuggle",
-  "Moonlight", "Playful", "Ocean", "Hug", "Harmony", "Enchanting", "Giggle", "Exploration", "Cookie", "Starlight", "Cuddle", "Wonder",
-  "Blossom", "Serenade", "Jolly", "Pajamas", "Giggly", "Quest", "Radiant", "Lullaby", "Sweetheart", "Candy", "Whisper",
-  "Cherish", "Delightful", "Sunshine", "Gummybear", "Wondrous", "Pillow", "Happiness", "Dazzle", "Rainbow", "Harmony",
-  "Blissful", "Muffin", "Harmony", "Fluffy", "Hug",  "Mischief", "Cheerful", "Enchantment", "Playful", "Cozy","Harmony", "Lollipop",
-  "Delight", "Cozy", "Cuddle", "Glitter", "Snuggle"
+  "Monstre","Enfant","Mignon","Jeu","Défi","Effrayant","Amusant","Aventure","Doux","Ludique","Terrible","Petite créature","Sourire","Effort",
+  "Fantaisie","Petite bête","Récompense","Énigme","Intriguant","Créatif","Épique","Émerveillement","Mystérieux","Joie","Extraordinaire",
+  "Exploration","Éclatant","Courir","Tendre","Magique","Téméraire","Chasse","Bonbon","Chuchoter","Étonnant","Trésor","Risquer","Rire","Frisson",
+  "Enchanté","Petit héros","Fabuleux","Capture","Énergie","Capture d'écran","Éblouissant","Ailes","Poursuite","Bonheur","Adorable"
 ];
 
 const monster_array = ['monster_1.png', 'monster_2.png', 'monster_3.png', 'monster_4.png', 'monster_5.png']

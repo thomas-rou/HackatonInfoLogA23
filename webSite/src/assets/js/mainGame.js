@@ -116,10 +116,6 @@ function addMonster(x, y, width, height) {
 
     // Attach a click event listener to the monster image
     monsterImg.addEventListener("click", function() {
-        let randomX = Math.random() * 100;
-        let randomY = Math.random() * 100;
-        addMonster(randomX, randomY);
-
         let miniGameIndex = Math.floor(Math.random() * 1);
         let miniGamePath = "";
         if ( miniGameIndex === 0 ){

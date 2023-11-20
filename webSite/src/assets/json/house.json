@@ -1,8 +1,8 @@
 [
     {
         "user": {
-            "room" : "garage",
-            "view" : "0"
+            "room" : 0,
+            "view" : 0
         },
         "rooms" : [
             {

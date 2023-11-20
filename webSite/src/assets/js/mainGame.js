@@ -1,39 +1,57 @@
 // Array of image file names
 const images = ['0_light.png', '1_light.png', '2_light.png', '3_light.png'];
 let house;
+
 let monsterLocation = {
     "room": 0,
     "view": 0,
-    "location": 0
+    "location": null
 }
 
 let user = {
-    "room" : "garage",
-    "view" : "0"
+    "room" : 0,
+    "view" : 0
 }
 
 // Preload images
-const imageObjects = images.map(imageName => {
-    const image = new Image();
-    image.src = `assets/png/garage/${imageName}`;
-    return image;
-});
+let imageObjects = []
 
-// Function to switch the image
-function switchImage(direction) {
+function generateImgRoom() {
+    imageObjects = [];
+    for (let i = 0; i <= 3; i++) {
+        const image = new Image();
+        image.src = `assets/png/${house[user.room].name}/${i}.png`;   
+        imageObjects.push(image)
+    }
+}
+
+function generateView(){
+    removeMonster();
+    removeObjects();
+
+    //Change image
     const imgElement = document.getElementById('img');
-    const currentImageIndex = images.indexOf(imgElement.src.split('/').pop());
+    imgElement.src = imageObjects[user.view].src;
 
-    let newIndex;
-
-    if (direction === 'left') {
-        newIndex = (currentImageIndex - 1 + images.length) % images.length;
-    } else if (direction === 'right') {
-        newIndex = (currentImageIndex + 1) % images.length;
+    //Add monster
+    console.log(user);
+    console.log(monsterLocation);
+    if (user.room === monsterLocation.room && user.view === monsterLocation.view) {
+        let location = monsterLocation.location;
+        addMonster(location.x, location.y, location.height, location.width);
     }
 
-    imgElement.src = imageObjects[newIndex].src;
 }
+
+function switchView(direction){
+    if (direction === 'left') {
+        user.view = (user.view - 1 + images.length) % images.length;
+    } else if (direction === 'right') {
+        user.view= (user.view + 1) % images.length;
+    }
+    generateView();
+}
+
 
 // Function to update container size
 function updateContainerSize() {
@@ -55,6 +73,13 @@ function removeMonster() {
     }
 }
 
+function removeObjects() {
+    let monsterImg = document.getElementById("monster");
+    if (monsterImg) {
+        monsterImg.parentNode.removeChild(monsterImg);
+    }
+}
+
 function generateMonster() {
     let randomRoom = Math.floor(Math.random() * house.length);
     let room = house[randomRoom];
@@ -64,10 +89,15 @@ function generateMonster() {
     let location = view.locations[radomLocation]
     location.monster = true;
 
+    monsterLocation.location = location;
+    monsterLocation.room = randomRoom;
+    monsterLocation.view = randomView;
+    
     addMonster(location.x, location.y, location.height, location.width);
 }
 
 function addMonster(x, y, width, height) {
+
     // Create a new img element
     let monsterImg = document.createElement("img");
 
@@ -101,10 +131,6 @@ function addMonster(x, y, width, height) {
     document.body.appendChild(monsterImg);
 }
 
-
-
-let rooms; // Declare a variable to store the JSON data
-
 async function fetchData() {
     return new Promise((resolve, reject) => {
         fetch('./assets/json/house.json')
@@ -133,6 +159,7 @@ window.onload = () => {
     fetchData() .then(data => {
         house = data[0].rooms;
         user =  data[0].user;
+        generateImgRoom()
         generateMonster()
     })
     .catch(error => {

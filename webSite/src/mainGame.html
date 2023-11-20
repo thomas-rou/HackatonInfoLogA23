@@ -6,17 +6,16 @@
     <title>Monster Finder Game</title>
     <link rel="stylesheet" href="assets/css/mainGame.css">
     <script src="assets/json/house.json" defer></script>
-    <script type="module" src="../src/assets/js/fileManager.js" defer></script>
-    <script type="module" src="assets/js/mainGame.js" defer></script>
+    <script src="assets/js/mainGame.js" defer></script>
 
 </head>
 <body>
     <img id="img" src="assets/png/garage/0_light.png" alt="Garage Image">
     <div id="container">
-        <div class="side-containers" onclick="switchImage('left')">
+        <div class="side-containers" onclick="switchView('left')">
             <div> go left </div>
         </div>
-        <div class="side-containers" onclick="switchImage('right')">
+        <div class="side-containers" onclick="switchView('right')">
             <div> go right </div>
         </div>
     </div>

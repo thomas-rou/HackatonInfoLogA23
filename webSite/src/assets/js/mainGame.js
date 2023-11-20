@@ -37,8 +37,59 @@ function updateContainerSize() {
     container.style.height = image.height + 'px';
 }
 
+function removeMonster() {
+    let monsterImg = document.getElementById("monster");
+    if (monsterImg) {
+        monsterImg.parentNode.removeChild(monsterImg);
+    }
+}
+
+function addMonster(x, y) {
+    // Create a new img element
+    let monsterImg = document.createElement("img");
+
+    // Set attributes for the monster image
+    monsterImg.src = "./assets/png/monster/monster_1.png"; // Replace with the actual path to your monster image
+    monsterImg.alt = "Monster Image";
+    monsterImg.id = "monster";
+
+     // Set the size of the monster image
+     monsterImg.style.width = "50px"; // Adjust the width as needed
+     monsterImg.style.height = "50px"; // Adjust the height as needed
+    
+    // Set the style attributes to position the monster based on x and y values
+    monsterImg.style.position = "absolute";
+    monsterImg.style.left = x + "%";
+    monsterImg.style.top = y + "%";
+
+    // Attach a click event listener to the monster image
+    monsterImg.addEventListener("click", function() {
+        removeMonster();
+        let randomX = Math.random() * 100;
+        let randomY = Math.random() * 100;
+        addMonster(randomX, randomY);
+
+        // Delay the navigation by 100 milliseconds (adjust as needed)
+        setTimeout(function() {
+            window.location.href = "typing.html";
+        }, 10);
+    });
+
+    // Append the monster image to the body
+    document.body.appendChild(monsterImg);
+}
+
 // Initial update on page load
-window.onload = updateContainerSize;
+window.onload = () => {
+    updateContainerSize();
+    removeMonster();
+
+
+    // Example usage: addMonster with random x and y values between 0 and 100
+    let randomX = Math.random() * 100;
+    let randomY = Math.random() * 100;
+    addMonster(randomX, randomY);
+}
 
 // Update container size on window resize
 window.addEventListener('resize', updateContainerSize);

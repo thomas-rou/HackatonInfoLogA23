@@ -40,6 +40,10 @@ body {
     animation: fadeOutOverlay 2s ease-in-out forwards;
 }
 
+.overlayFadeIn {
+    animation: fadeInOverlay 2s ease-in-out forwards;
+}
+
 @keyframes fadeOutOverlay {
     from {
         opacity: 1;
@@ -48,6 +52,17 @@ body {
     to {
         opacity: 0;
     }
+}
+
+@keyframes fadeInOverlay {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
 }
 
 .story {
@@ -89,6 +104,30 @@ body {
     }
 }
 
+#audioControl {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+#muteButton, #playButton {
+    font-family: 'IM Fell DW Pica', serif;
+    opacity: 0;
+    transition: opacity 0.5s;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: var(--main-color);
+}
+
+#muteButton {
+    margin-right: 10px; /* Adjust as needed */
+}
+
+#playButton {
+    opacity: 1;
+}
+
 #skipButton {
     position: fixed;
     font-family: 'IM Fell DW Pica', serif;
@@ -102,6 +141,6 @@ body {
     color: var(--main-color);
 }
 
-#skipButton.show, #skipButton:hover {
+#skipButton.show, #skipButton:hover, #muteButton:hover, #muteButton.show {
     opacity: 1;
 }

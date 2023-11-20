@@ -36,7 +36,7 @@ function turnKeysToWhite() {
 function turnKeyToGold() {
   const firstChar = targetWord.charAt(0).toLocaleUpperCase();
   if( document.getElementById(firstChar)){
-    document.getElementById(firstChar).style.backgroundColor = "gold";
+    document.getElementById(firstChar).style.backgroundColor = "#FFBE0B";
   }
 }
 
@@ -65,7 +65,7 @@ function handleEndFight() {
   document.body.appendChild(label);
 
   setTimeout(function () {
-    window.location.href = 'index.html';
+    window.location.href = 'mainGame.html';
   }, 3000); // 5000 milliseconds = 5 seconds
 
 }

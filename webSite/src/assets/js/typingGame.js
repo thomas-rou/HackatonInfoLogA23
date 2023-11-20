@@ -1,5 +1,5 @@
 
-const motsFrancais = [
+const words_array = [
   "Monstre","Enfant","Mignon","Jeu","Défi","Effrayant","Amusant","Aventure","Doux","Ludique","Terrible","Petite créature","Sourire","Effort",
   "Fantaisie","Petite bête","Récompense","Énigme","Intriguant","Créatif","Épique","Émerveillement","Mystérieux","Joie","Extraordinaire",
   "Exploration","Éclatant","Courir","Tendre","Magique","Téméraire","Chasse","Bonbon","Chuchoter","Étonnant","Trésor","Risquer","Rire","Frisson",

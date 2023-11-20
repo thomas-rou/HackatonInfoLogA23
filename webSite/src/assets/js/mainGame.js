@@ -92,8 +92,6 @@ function generateMonster() {
     monsterLocation.location = location;
     monsterLocation.room = randomRoom;
     monsterLocation.view = randomView;
-    
-    addMonster(location.x, location.y, location.height, location.width);
 }
 
 function addMonster(x, y, width, height) {
@@ -162,6 +160,7 @@ window.onload = () => {
         user =  data[0].user;
         generateImgRoom()
         generateMonster()
+        generateView();
     })
     .catch(error => {
         console.error('Error in fetchData:', error);

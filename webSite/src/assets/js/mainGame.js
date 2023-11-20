@@ -116,14 +116,19 @@ function addMonster(x, y, width, height) {
 
     // Attach a click event listener to the monster image
     monsterImg.addEventListener("click", function() {
-        removeMonster();
         let randomX = Math.random() * 100;
         let randomY = Math.random() * 100;
         addMonster(randomX, randomY);
 
+        let miniGameIndex = Math.floor(Math.random() * 1);
+        let miniGamePath = "";
+        if ( miniGameIndex === 0 ){
+            miniGamePath = "typing.html";
+        }
+
         // Delay the navigation by 100 milliseconds (adjust as needed)
         setTimeout(function() {
-            window.location.href = "typing.html";
+            window.location.href = miniGamePath;
         }, 10);
     });
 

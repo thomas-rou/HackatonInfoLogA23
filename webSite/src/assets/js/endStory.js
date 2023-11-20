@@ -25,16 +25,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Define the story sentences
     const storySentences = [
-        "After confronting the mysterious realms of his house and the sources of the distrubances,",
-        "To the surprise of the child, the monsters were not as menacing as they seemed.",
-        "They were playful creatures, lost and scared in the human world.",
-        "With kindness and understanding, the child befriended the monsters and",
-        "helped them find their way back to their magical realm.",
-        "As a token of gratitude, the monsters left behind a sprinkle of magic",
-        "that turned the child's once ordinary home into a place of wonder and enchantment.",
-        "From that day forward, the child and his new friends lived harmoniously,",
-        "sharing magical adventures and creating cherished memories in the heart of Montreal."
-    ];
+        "Après avoir affronté les domaines mystérieux de sa maison et les sources des perturbations,",
+        "À la surprise de l'enfant, les monstres n'étaient pas aussi menaçants qu'ils en avaient l'air.",
+        "Ils étaient des créatures ludiques, perdues et effrayées dans le monde humain.",
+        "Avec gentillesse et compréhension, l'enfant se lia d'amitié avec les monstres et",
+        "les a aidés à retrouver leur chemin vers leur royaume magique.",
+        "En signe de gratitude, les monstres laissèrent derrière eux une pincée de magie",
+        "qui transforma la maison autrefois ordinaire de l'enfant en un lieu de merveille et d'enchantement.",
+        "À partir de ce jour, l'enfant et ses nouveaux amis vécurent harmonieusement,",
+        "partageant des aventures magiques et créant des souvenirs précieux au cœur de Montréal."
+      ];
 
     let sentenceIndex = 0;
     let wordIndex = 0;

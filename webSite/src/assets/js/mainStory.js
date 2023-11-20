@@ -25,14 +25,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Define the story sentences
     const storySentences = [
-        "Once upon a time, as the snow gently covered the streets of the city of Montreal,",
-        "a young child discovered a strange phenomenon in his own house.",
-        "Mysterious sounds echoed through the dark hallways,",
-        "and fleeting shadows danced in the forgotten corners.",
-        "The child then set out to investigate the origin of these nocturnal disturbances.",
-        "Armed with his tenacity and ingenious spirit,",
-        "he set out to chase away the mysterious monsters hiding in the corners of his home."
-    ];
+        "Il était une fois, alors que la neige recouvrait doucement les rues de la ville de Montréal,",
+        "un jeune enfant découvrit un phénomène étrange dans sa propre maison.",
+        "Des sons mystérieux résonnaient dans les couloirs sombres,",
+        "et des ombres fugaces dansaient dans les coins oubliés.",
+        "L'enfant se mit alors en quête d'investiguer l'origine de ces perturbations nocturnes.",
+        "Armé de sa ténacité et de son esprit ingénieux,",
+        "il partit pour chasser les monstres mystérieux cachés dans les recoins de sa maison."
+      ];
 
     let sentenceIndex = 0;
     let wordIndex = 0;
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function addSkipButton() {
         const skipButton = document.createElement("button");
         skipButton.id = "skipButton";
-        skipButton.textContent = "Skip Story" + "\u2192";
+        skipButton.textContent = "Sauter l'introduction" + "\u2192";
         skipButton.classList.add("skipButton");
         skipButton.addEventListener('click', function() {
             sentenceIndex = storySentences.length + 1;
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function addPlayButton() {
         const playButton = document.createElement("button");
         playButton.id = "playButton";
-        playButton.textContent = "Play music";
+        playButton.textContent = "Jouer la musique";
         playButton.classList.add("playButton");
         playButton.addEventListener("click", function () {
             backgroundMusic.play();
@@ -156,15 +156,15 @@ document.addEventListener("DOMContentLoaded", function() {
     function addMuteButton() {
         const muteButton = document.createElement("button");
         muteButton.id = "muteButton";
-        muteButton.textContent = "Mute";
+        muteButton.textContent = "Désactiver le son";
         muteButton.classList.add("muteButton");
         muteButton.addEventListener("click", function () {
             if (backgroundMusic.volume === 0) {
                 backgroundMusic.volume = 1;
-                muteButton.textContent = "Mute";
+                muteButton.textContent = "Désactiver le son";
             } else {
                 backgroundMusic.volume = 0;
-                muteButton.textContent = "Unmute";
+                muteButton.textContent = "Activer le son";
             }
         });
         audioControl.appendChild(muteButton);

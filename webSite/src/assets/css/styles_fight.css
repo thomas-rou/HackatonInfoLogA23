@@ -6,7 +6,6 @@ body {
     border: 15px solid black; 
 }
 
-
 body::before {
     content: "";
     position: fixed;
@@ -106,4 +105,86 @@ h2 {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
     z-index: 9998; /* Z-index just below the label */
+}
+
+/*patternGame*/
+.button-container {
+    display: center;
+    margin: auto;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    gap: 100px;
+    margin: 50px;
+    justify-content: center;
+}
+
+.color-button {
+    width: 160px;   
+    height: 160px;
+}
+
+.color-button:hover {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0px 0px 0px 2px white;
+    filter: brightness(1.5);
+}
+
+#blue {
+    background-color: #4361EE;
+    border-radius: 100%;
+} 
+.blue-click{
+    background-color: rgb(150,255,150) !important;
+}
+
+#pink {
+    background-color: #F72585;
+    border-radius: 100%;
+}
+
+.pink-click{
+    background-color: rgb(255,150,150) !important;
+}
+
+#yellow { 
+    background-color: #FFBE0B; 
+    border-radius: 100%;
+}
+.yellow-click {
+    background-color: rgb(255,255,150) !important;
+}
+#purple {
+    background-color: #8338EC;
+    border-radius: 100%;
+}
+.purple-click{
+    background-color: rgb(150,150,255) !important;
+}
+
+.start-button {
+    /*
+    padding: 10px;
+    font-size: 10px;
+    cursor: pointer;
+    */
+    background-color: rgb(25, 25, 25);
+    border-radius: 100%;
+    box-shadow: 0 0 50px;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+}
+
+p{
+    color:white;
+    font-size: 35px;
+    font-weight: 400;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }

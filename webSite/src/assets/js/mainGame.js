@@ -1,5 +1,16 @@
 // Array of image file names
 const images = ['0_light.png', '1_light.png', '2_light.png', '3_light.png'];
+let house;
+let monsterLocation = {
+    "room": 0,
+    "view": 0,
+    "location": 0
+}
+
+let user = {
+    "room" : "garage",
+    "view" : "0"
+}
 
 // Preload images
 const imageObjects = images.map(imageName => {
@@ -42,6 +53,18 @@ function removeMonster() {
     if (monsterImg) {
         monsterImg.parentNode.removeChild(monsterImg);
     }
+}
+
+function generateMonster() {
+    let randomRoom = Math.floor(Math.random() * house.length);
+    let room = house[randomRoom];
+    let randomView = Math.floor(Math.random() * room.views.length);
+    let view = room.views[randomView];
+    let radomLocation = Math.floor(Math.random() * view.locations.length);
+    let location = view.locations[radomLocation]
+    location.monster = true;
+
+    addMonster(location.x, location.y, location.height, location.width);
 }
 
 function addMonster(x, y, width, height) {
@@ -107,19 +130,10 @@ window.onload = () => {
     updateContainerSize();
     removeMonster();
 
-    fetchData() .then(rooms => {
-        console.log('Rooms:', rooms);
-
-
-        let randomRoom = Math.floor(Math.random() * rooms.length);
-        let room = rooms[randomRoom];
-        let randomView = Math.floor(Math.random() * room.views.length);
-        let view = room.views[randomView];
-        let radomLocation = Math.floor(Math.random() * view.locations.length);
-        let location = view.locations[radomLocation]
-        addMonster(location.x, location.y, location.height, location.width);
-
-
+    fetchData() .then(data => {
+        house = data[0].rooms;
+        user =  data[0].user;
+        generateMonster()
     })
     .catch(error => {
         console.error('Error in fetchData:', error);

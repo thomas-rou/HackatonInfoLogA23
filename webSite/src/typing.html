@@ -6,6 +6,7 @@
   <title>Typing Game</title>
   <link rel="stylesheet" href="./assets/css/styles_fight.css">
   <link rel="stylesheet" href="./assets/css/styles_keyboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&display=swap" rel="stylesheet">
   <script src="./assets/js/typingGame.js" defer></script>
 </head>
 
@@ -14,59 +15,61 @@
         <h1>Fight the Monster!</h1>
     </header>
     <div id="main">
-        <article>
-            <img src="./assets/png/monster/monster_1.png" alt="monster">
-            <h2 id="targetWord"></h2>
-            <h2 id="wordWritten"></h2>
+            <img src="" alt="monster" id="monster">
+              <h2 id="targetWord"></h2>
+              <h2 id="wordWritten"></h2>
             <div class="keyboard">
                 <div class="row">
                   <div class="key key__esc">
                     <i data-feather="x"></i>
+                    ESC
                   </div>
                   <div class="key key__symbols">
-                    ! <span> 1
+                    1
                   </div>
                   <div class="key key__symbols">
-                    @ <span> 2
+                    2
                   </div>
                   <div class="key key__symbols">
-                    # <span> 3
+                    3
                   </div>
                   <div class="key key__symbols">
-                    $ <span> 4
+                    4
                   </div>
                   <div class="key key__symbols">
-                    % <span> 5
+                    5
                   </div>
                   <div class="key key__symbols">
-                    ^ <span> 6
+                    6
                   </div>
                   <div class="key key__symbols">
-                    & <span> 7
+                    7
                   </div>
                   <div class="key key__symbols">
-                    * <span> 8
+                    8
                   </div>
                   <div class="key key__symbols">
-                    ( <span> 9
+                    9
                   </div>
                   <div class="key key__symbols">
-                    ) <span> 0
+                    0
                   </div>
                   <div class="key key__symbols">
-                    _ <span> -
+                    -
                   </div>
                   <div class="key key__symbols">
-                    + <span> =
+                    +
                   </div>
                   <div class="key key__delete key__icon">
                     <i data-feather="delete"></i>
+                    BACKSPACE
                   </div>
                 </div>
-                    
+
                 <div class="row">
                   <div class="key key__oneandhalf">
                     <i data-feather="log-in"></i>
+                    TAB
                   </div>
                   <div id="Q" class="key letter">
                     Q
@@ -108,10 +111,11 @@
                     | <span> \
                   </div>
                 </div>
-                    
+
                 <div class="row">
                   <div class="key key__caps">
                     <i data-feather="meh"></i>
+                    CAPS LOCK
                   </div>
                   <div id="A" class="key letter">
                     A
@@ -141,19 +145,21 @@
                     L
                   </div>
                   <div class="key key__symbols">
-                    : <span> ;
+                    :
                   </div>
                   <div class="key key__symbols">
-                    " <span> '
+                    "
                   </div>
                   <div class="key key__enter">
                     <i data-feather="corner-down-left"></i>
+                    ENTER
                   </div>
                 </div>
-                
+
                 <div class="row">
                   <div class="key key__shift-left">
                     <i data-feather="arrow-up-circle"></i>
+                    SHIFT
                   </div>
                   <div id="Z" class="key letter">
                     Z
@@ -177,70 +183,67 @@
                     M
                   </div>
                   <div class="key key__symbols">
-                    > <span> .
+                    >
                   </div>
                   <div class="key key__symbols">
-                    < <span> .
+                    <
                   </div>
                   <div class="key key__symbols">
-                    ? <span> /
-                  </div>
-                  <div class="key">
-                    <i data-feather="arrow-up-circle"></i>
+                    ?
                   </div>
                   <div class="key key__arrow">
-                    <i data-feather="arrow-up"></i>
+                    &#8593;
                   </div>
-                  <div class="key">
-                    <i data-feather="trash-2"></i>
+                  <div class="key key__shift-right">
+                    <i data-feather="arrow-up-circle"></i>
+                    SHIFT
                   </div>
                 </div>
-                    
+
                 <div class="row">
                   <div class="key key__bottom-funct">
-                    ^
+                    CTRL
                   </div>
                   <div class="key key__bottom-funct">
                     <i data-feather="activity"></i>
+                    ACT
                   </div>
                   <div class="key key__bottom-funct">
                     <i data-feather="command"></i>
+                    ALT
                   </div>
                   <div class="key key__spacebar">
+                    SPACE
                   </div>
                   <div class="key">
                     <i data-feather="command"></i>
+                    ALT
                   </div>
                   <div class="key">
                     <i data-feather="activity"></i>
+                    MENU
                   </div>
                   <div class="key key__arrow">
                     <i data-feather="arrow-left"></i>
+                    &#8592;
                   </div>
                   <div class="key key__arrow">
                     <i data-feather="arrow-down"></i>
+                    &#8595;
                   </div>
                   <div class="key key__arrow">
                     <i data-feather="arrow-right"></i>
+                    &#8594;
+                  </div>
+                  <div class="key key__logo">
+                      <img src="./assets/png/KAMMT Games logo.png" alt="logo" id="logo">
                   </div>
                 </div>
             </div>
-        </article>
-        
-        <nav></nav>
-        <aside></aside>
 
         <div id="overlay"></div>
     </div>
     <footer></footer>
   </body>
-
-<body>
-  
-  <script>
-
-    // source du keyboard : https://codepen.io/Mickel07/pen/YdONYK
-  </script>
-</body>
 </html>
 

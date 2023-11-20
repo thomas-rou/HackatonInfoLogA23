@@ -1,76 +1,63 @@
+.keyboard {
+  display: grid;
+  width: 70vw;
+  max-width: fit-content;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 10px;
+  background: #000000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 0.5em;
+}
 
-span {
-    display: block;
-    margin-top: -5px;
-  }
-  
-  .keyboard {
-    width: 780px;
-    height: 262px;
-    margin: 0px auto;
-    border: 3px solid #000000;
-    border-radius: 10px;
-    background: #000000;
-  }
-  
-  .row {
-    margin-top: 2px;
-    overflow: hidden;
-  }
-  
-  .key {
-    width: 50px;
-    height: 50px;
-    float: left;
-    cursor: pointer;
-    background-color: #FFFFF4;
-    color: #000000;
-    line-height: 48px;
-    text-align: center;
-    margin-left: 2px;
-    border-radius: 4px;
-  }
-  
-  .key__symbols {
-    line-height: 28px;
-  }
-  
-  .key__delete {
-    width: 100px;
-  }
-  
-  .key__oneandhalf {
-    width: 75px;
-  }
-  
-  .key__esc {
-    background: #F72585;
-  }
-  
-  .key__enter {
-    width: 112px;
-  }
-  
-  .key__caps {
-    width: 90px;
-  }
-  
-  .key__shift-left {
-    width: 100px;
-  }
-  
-  .key__spacebar {
-    width: 300px;
-  }
-  
-  .key__bottom-funct {
-    width: 70px;
-  }
-  
-  .key__arrow {
-    background: #4361EE;
-  }
-  
-  .feather {
-    margin-top: 10px;
-  }
+.row {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  justify-content: center;
+  height: auto;
+}
+
+.key {
+  grid-column: span 2;
+  height: 3em;
+  margin: 0.1em;
+  cursor: pointer;
+  background-color: #FFFFF4;
+  color: #000000;
+  text-align: center;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5vw;
+}
+
+.key__delete, .key__shift-left,.key__shift-right {
+  grid-column: span 4;
+}
+
+.key__oneandhalf, .key__caps{
+  grid-column: span 3;
+}
+
+.key__enter {
+  grid-column: span 5;
+}
+
+.key__spacebar {
+  grid-column: span 12;
+}
+
+.key__logo > img {
+  flex-shrink: 0;
+  width: 3em;
+  height: auto;
+}
+
+.key__esc {
+  background: #4361EE;
+}
+
+.key__arrow {
+  background: #8338EC;
+}

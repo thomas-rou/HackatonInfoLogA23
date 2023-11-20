@@ -1,25 +1,35 @@
-
-const words_array = [ 
+ // inspiration du keyboard : https://codepen.io/Mickel07/pen/YdONYK
+const words_array = [
   "Happy", "Monster", "Sunshine", "Rainbow", "Friendship", "Adventure", "Magic", "Brave", "Laughter", "Teddy",
   "Castle", "Butterfly", "Cupcake", "Dream", "Smiles", "Treasure", "Unicorn", "Superhero", "Puppy", "Popcorn","Joyful", "Snuggle",
   "Moonlight", "Playful", "Ocean", "Hug", "Harmony", "Enchanting", "Giggle", "Exploration", "Cookie", "Starlight", "Cuddle", "Wonder",
   "Blossom", "Serenade", "Jolly", "Pajamas", "Giggly", "Quest", "Radiant", "Lullaby", "Sweetheart", "Candy", "Whisper",
   "Cherish", "Delightful", "Sunshine", "Gummybear", "Wondrous", "Pillow", "Happiness", "Dazzle", "Rainbow", "Harmony",
-  "Blissful", "Muffin", "Harmony", "Fluffy", "Hug",  "Mischief", "Cheerful", "Enchantment", "Playful", "Cozy","Harmony", "Lollipop", 
+  "Blissful", "Muffin", "Harmony", "Fluffy", "Hug",  "Mischief", "Cheerful", "Enchantment", "Playful", "Cozy","Harmony", "Lollipop",
   "Delight", "Cozy", "Cuddle", "Glitter", "Snuggle"
 ];
+
+const monster_array = ['monster_1.png', 'monster_2.png', 'monster_3.png', 'monster_4.png', 'monster_5.png']
 
 function getRandomWord() {
   const randomIndex = Math.floor(Math.random() * words_array.length);
   return words_array[randomIndex];
 }
 
+function getRandomMonster() {
+  const randomIndex = Math.floor(Math.random() * monster_array.length);
+  return monster_array[randomIndex];
+}
+
 let targetWord = getRandomWord();
 let wordsCount = 0;
+const endGameScreenTime = 3000;
+const maxWords = 5;
 
 
 // Display the initial word
 displayWord();
+displayMonster();
 
 // Listen for key presses
 document.addEventListener('keydown', handleKeyPress);
@@ -33,10 +43,24 @@ function turnKeysToWhite() {
   });
 }
 
+function turnKeyWhite(pressedKey) {
+  const char = pressedKey.toLocaleUpperCase();
+  if( document.getElementById(char)){
+    document.getElementById(char).style.backgroundColor = "#FFFFF4";
+  }
+}
+
 function turnKeyToGold() {
   const firstChar = targetWord.charAt(0).toLocaleUpperCase();
   if( document.getElementById(firstChar)){
     document.getElementById(firstChar).style.backgroundColor = "#FFBE0B";
+  }
+}
+
+function turnKeyRed(pressedKey) {
+  const char = pressedKey.toLocaleUpperCase();
+  if( document.getElementById(char)){
+    document.getElementById(char).style.backgroundColor = "#FF0000";
   }
 }
 
@@ -45,7 +69,11 @@ function displayWord() {
   document.getElementById('targetWord').textContent = targetWord;
   turnKeysToWhite();
   turnKeyToGold();
+}
 
+function displayMonster() {
+  const monster = getRandomMonster();
+  document.getElementById('monster').src = `./assets/png/monster//${monster}`;
 }
 
 function displayWritten(char) {
@@ -66,13 +94,13 @@ function handleEndFight() {
 
   setTimeout(function () {
     window.location.href = 'mainGame.html';
-  }, 3000); // 5000 milliseconds = 5 seconds
+  }, endGameScreenTime);
 
 }
 
 function handleKeyPress(event) {
-  const typedChar = String.fromCharCode(event.keyCode).toLowerCase();
-  const currentChar = targetWord.charAt(0).toLowerCase();
+  const typedChar = event.key;
+  const currentChar = targetWord.charAt(0);
 
   if (typedChar === currentChar) {
     // Correct key pressed
@@ -85,7 +113,7 @@ function handleKeyPress(event) {
       wordsCount++;
       console.log(wordsCount);
 
-      if (wordsCount === 5) {
+      if (wordsCount === maxWords) {
         handleEndFight();
       }
 
@@ -93,5 +121,10 @@ function handleKeyPress(event) {
       targetWord = getRandomWord();
       displayWord();
     }
+  } else {
+    turnKeyRed(typedChar);
+    setTimeout(function () {
+      turnKeyWhite(typedChar);
+    }, 100);
   }
 }

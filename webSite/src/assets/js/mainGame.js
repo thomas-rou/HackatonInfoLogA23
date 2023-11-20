@@ -44,7 +44,7 @@ function removeMonster() {
     }
 }
 
-function addMonster(x, y) {
+function addMonster(x, y, width, height) {
     // Create a new img element
     let monsterImg = document.createElement("img");
 
@@ -54,8 +54,7 @@ function addMonster(x, y) {
     monsterImg.id = "monster";
 
      // Set the size of the monster image
-     monsterImg.style.width = "50px"; // Adjust the width as needed
-     monsterImg.style.height = "50px"; // Adjust the height as needed
+     monsterImg.style.width =  Math.min(width, height) + "%"; // Adjust the width as needed
     
     // Set the style attributes to position the monster based on x and y values
     monsterImg.style.position = "absolute";
@@ -79,16 +78,52 @@ function addMonster(x, y) {
     document.body.appendChild(monsterImg);
 }
 
+
+
+let rooms; // Declare a variable to store the JSON data
+
+async function fetchData() {
+    return new Promise((resolve, reject) => {
+        fetch('./assets/json/house.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                resolve(data);
+            })
+            .catch(error => {
+                console.error('Error fetching JSON:', error);
+                reject(error);
+            });
+    });
+}
+
+
 // Initial update on page load
 window.onload = () => {
     updateContainerSize();
     removeMonster();
 
+    fetchData() .then(rooms => {
+        console.log('Rooms:', rooms);
 
-    // Example usage: addMonster with random x and y values between 0 and 100
-    let randomX = Math.random() * 100;
-    let randomY = Math.random() * 100;
-    addMonster(randomX, randomY);
+
+        let randomRoom = Math.floor(Math.random() * rooms.length);
+        let room = rooms[randomRoom];
+        let randomView = Math.floor(Math.random() * room.views.length);
+        let view = room.views[randomView];
+        let radomLocation = Math.floor(Math.random() * view.locations.length);
+        let location = view.locations[radomLocation]
+        addMonster(location.x, location.y, location.height, location.width);
+
+
+    })
+    .catch(error => {
+        console.error('Error in fetchData:', error);
+    });
 }
 
 // Update container size on window resize

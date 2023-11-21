@@ -1,27 +1,18 @@
-// Array of image file names
-const images = ['0_light.png', '1_light.png', '2_light.png', '3_light.png'];
 
-// Preload images
-const imageObjects = images.map(imageName => {
-    const image = new Image();
-    image.src = `assets/png/garage/${imageName}`;
-    return image;
-});
+let currentImageIndex = 0;
 
 // Function to switch the image
 function switchImage(direction) {
     const imgElement = document.getElementById('img');
-    const currentImageIndex = images.indexOf(imgElement.src.split('/').pop());
-
-    let newIndex;
-
+    const imgCount = 4;
+    
     if (direction === 'left') {
-        newIndex = (currentImageIndex - 1 + images.length) % images.length;
+        currentImageIndex = (currentImageIndex - 1 + imgCount) % imgCount;
     } else if (direction === 'right') {
-        newIndex = (currentImageIndex + 1) % images.length;
+        currentImageIndex = (currentImageIndex + 1) % imgCount;
     }
 
-    imgElement.src = imageObjects[newIndex].src;
+    imgElement.src = `assets/png/garage/${currentImageIndex}.png`;
 }
 
 // Function to update container size
@@ -31,6 +22,7 @@ function updateContainerSize() {
 
     // Get the container element
     var container = document.getElementById('container');
+
 
     // Set the container size based on the image size
     container.style.width = image.width + 'px';
@@ -112,47 +104,74 @@ function makeDraggable() {
 }
 
 function makeDraggableRightOnly() {
-    //const draggableBox = document.getElementById('tire');
-    const draggableBox = document.getElementById('draggableBox');
-    //draggableBox.style.left = "100px"
+    const tireImg = document.getElementById('tire');
+    const draggableBox = document.getElementsByClassName('draggable')[0]; // objet invisible entourant l'endroit de la sélection
 
     let isDragging = false;
+    let inEvidence = 0;
     let initialObjectXpos, initialXpos;
+
 
     draggableBox.addEventListener('mousedown', (e) => {
         isDragging = true;
-
-        initialObjectXpos = draggableBox.offsetLeft;
+        inEvidence++;
+        checkEvidence();
+        initialObjectXpos = 0.5;
         initialXpos = e.clientX;
     });
 
+    draggableBox.addEventListener('mouseover', (e) => {
+        inEvidence++;
+        checkEvidence();
+    });
+
+    draggableBox.addEventListener('mouseleave', (e) => {
+        inEvidence--;
+        checkEvidence();
+    })
+
     document.addEventListener('mousemove', (e) => {
         if (isDragging) {
-            const xDiff = e.clientX - initialXpos;
-            
+            const xDiff = (e.clientX - initialXpos) / window.innerWidth;
+            const maxoffset = draggableBox.clientWidth / window.innerWidth * 100;
             if (initialObjectXpos + xDiff >= initialObjectXpos) {
-                draggableBox.style.left = `${initialObjectXpos + xDiff}px`;
-            } else { 
-                draggableBox.style.left = `${initialObjectXpos}px`;
+                tireImg.style.left = `${Math.min((initialObjectXpos + xDiff) * 100, initialObjectXpos * 100 + maxoffset)}%`;
+            } else {
+                tireImg.style.left = `${initialObjectXpos * 100}%`;
             }
         }
     });
 
     document.addEventListener('mouseup', () => {
         isDragging = false;
-        draggableBox.style.left = `${initialObjectXpos}px`; // Si le monstre est découvert, ne pas faire?
+        inEvidence--;
+        checkEvidence();
+        tireImg.style.left = `${initialObjectXpos * 100}%`;
+
     });
+
+    function checkEvidence()
+    {
+        if (inEvidence <= 0)
+        {
+            inEvidence = 0;
+            tireImg.style.filter = 'brightness(100%)';
+        } else {
+            tireImg.style.filter = 'brightness(150%)';
+        }
+    }
 }
 
-// Initial update on page load
+
+//Initial update on page load
 window.onload = () => {
     updateContainerSize();
-    removeMonster();
+    // removeMonster();
 
-    // Example usage: addMonster with random x and y values between 0 and 100
-    let randomX = Math.random() * 100;
-    let randomY = Math.random() * 100;
-    addMonster(randomX, randomY);
+    // // Example usage: addMonster with random x and y values between 0 and 100
+    // let randomX = Math.random() * 100;
+    // let randomY = Math.random() * 100;
+    // addMonster(randomX, randomY);
     makeDraggableRightOnly()
 };
 

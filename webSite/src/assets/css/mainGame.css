@@ -38,9 +38,11 @@ body {
     text-align: center;
 }
 
-#draggableBox {
+.draggable {
     position: absolute;
-    border: 2px solid red;
-    height: 100px;
-    width: 100px;
+    /* border: 2px solid red; */
+    height: 8.8%;
+    width: 14.5%;
+    left: 5.1%;
+    top: 38%;
 }

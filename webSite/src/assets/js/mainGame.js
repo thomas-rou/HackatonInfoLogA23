@@ -114,7 +114,7 @@ function generateDoor(x, y, width, height, nextRoom){
      });
  
      // Append the monster image to the body
-     document.getElementById("container").appendChild(doorImg); 
+     //document.getElementById("container").appendChild(doorImg); 
 }
 
 function generateMonster() {

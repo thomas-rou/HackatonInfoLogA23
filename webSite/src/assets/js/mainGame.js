@@ -130,13 +130,14 @@ function addMonster(x, y, width, height) {
         if ( miniGameIndex === 0 ){
             miniGamePath = "typing.html";
         } else if ( miniGameIndex === 1 ) {
-            miniGamePath = "patternGame.html";
+            miniGamePath = "pattern.html";
         }
 
         // Delay the navigation by 100 milliseconds (adjust as needed)
         setTimeout(function() {
+            
             window.location.href = miniGamePath + "?monsterIndex=" + encodeURIComponent(monsterLocation.monsterIndex) 
-            + "&roomIndex=" + encodeURIComponent(user.room) + "&view=" + encodeURIComponent(user.view);
+            + "&roomName=" + encodeURIComponent(house[user.room].name) + "&viewIndex=" + encodeURIComponent(user.view);
         }, 10);
     });
 

@@ -34,6 +34,7 @@ let wrongKeys = 0;
 
 
 // Display the initial word
+displayBackground()
 displayWord();
 displayMonster();
 
@@ -77,6 +78,16 @@ function turnKeyPurple(pressedKey) {
   }
 }
 
+function displayBackground(){
+  const body = document.body;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const room = urlParams.get("roomName");
+  const view = urlParams.get("viewIndex");
+  
+  const newBackgroundImageURL = `url(../png/${room}/${view}.png)`;
+  body.style.setProperty('--before-background-image', newBackgroundImageURL);
+}
 
 function displayWord() {
   document.getElementById('targetWord').textContent = targetWord;

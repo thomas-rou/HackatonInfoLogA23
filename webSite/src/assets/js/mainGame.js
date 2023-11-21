@@ -30,6 +30,7 @@ function generateImgRoom() {
 }
 
 function generateView(){
+    removeDoor();
     removeMonster();
     removeObjects();
 
@@ -44,8 +45,10 @@ function generateView(){
     }
 
     // Add door 
-    console.log(house[user.room].views[user.view]);
-    generateDoor();
+    const door = house[user.room].views[user.view].door;
+    if(door) {
+        generateDoor(door.x, door.y, door.room);
+    }
 
 }
 
@@ -88,33 +91,40 @@ function removeObjects() {
 }
 
 function removeDoor(){
-
+    let door = document.getElementById("door");
+    if (door) {
+        door.parentNode.removeChild(door);
+    }
 }
 
-function generateDoor(x, y, width, height, nextRoom){
+function generateDoor(x, y, nextRoom){
      // Create a div element
-     let doorImg = document.createElement("img");
+     var iconElement = document.createElement('iconify-icon');
+     iconElement.id = "door"
 
-     // Set attributes for the monster image
-     doorImg.src = `./assets/png/monster/monster_${monsterLocation.monsterIndex}.png`; // Replace with the actual path to your monster image
-     doorImg.alt = "Monster Image";
-     doorImg.id = "monster";
+     // Set the icon attribute
  
-      // Set the size of the monster image
-      doorImg.style.width =  Math.min(width, height) + "%"; // Adjust the width as needed
-     
-     // Set the style attributes to position the monster based on x and y values
-     doorImg.style.position = "absolute";
-     doorImg.style.left = x + "%";
-     doorImg.style.top = y + "%";
- 
+     iconElement.style.width = '100';
+
+     // Set the x and y position of the icon
+     iconElement.style.position = 'absolute';
+     iconElement.style.left = x+'%';
+     iconElement.style.top = y+'%';
+
+     iconElement.setAttribute('icon', 'fa6-solid:door-open');
+     iconElement.setAttribute('width', '7em');
+
+
+
+     iconElement.style.color = 'white';
+
      // Attach a click event listener to the monster image
-     doorImg.addEventListener("click", function() {
+     iconElement.addEventListener("click", function() {
 
      });
  
      // Append the monster image to the body
-     //document.getElementById("container").appendChild(doorImg); 
+     document.getElementById("container").appendChild(iconElement); 
 }
 
 function generateMonster() {

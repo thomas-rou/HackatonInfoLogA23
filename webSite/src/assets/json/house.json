@@ -1,7 +1,7 @@
 [
     {
         "user": {
-            "room" : 0,
+            "room" : 2,
             "view" : 0,
             "monster" : 0
         },
@@ -36,11 +36,12 @@
                             {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
                             {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
                         ],
-                        "door": {
-                            "x": 10, 
-                            "y": 5, 
-                            "roomIndex": 1
-                        }
+                        "doors": [{
+                            "x": 5, 
+                            "y": 70, 
+                            "roomIndex": 1,
+                            "view" : 0
+                        }]
                     },
                     {
                         "name": "3",
@@ -55,7 +56,7 @@
                 ]
             },
             {
-                "name": "stair_up",
+                "name": "stair",
                 "views": [
                     {
                         "name": "0",
@@ -64,11 +65,34 @@
                         "locations": [
                             {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"}
                         ],
-                        "door": {
+                        "doors": [{
                             "x": 45, 
-                            "y": 5, 
-                            "roomIndex": 2
-                        }
+                            "y": 15, 
+                            "roomIndex": 2,
+                            "view" : 0
+                        }]
+                    },
+                    {
+                        "name": "1",
+                        "left": "0",
+                        "right": "0",
+                        "locations": [
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                        ],
+                        "doors": [
+                            {
+                            "x": 55, 
+                            "y": 60, 
+                            "roomIndex": 3,
+                            "view" : 0
+                            },
+                            {
+                                "x": 45, 
+                                "y": 48, 
+                                "roomIndex": 0,
+                                "view" : 0
+                            }
+                        ]
                     }
                 ]
             },
@@ -94,11 +118,12 @@
                             {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
                             {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
                         ],
-                        "door": {
+                        "doors": [{
                             "x": 80, 
                             "y": 70, 
-                            "roomIndex": 3
-                        }
+                            "roomIndex": 1,
+                            "view" : 1
+                        }]
                     },
                     {
                         "name": "2",
@@ -123,23 +148,65 @@
                 ]
             },
             {
-                "name": "stair_down",
+                "name": "laundry_room",
                 "views": [
                     {
                         "name": "0",
+                        "left": "1",
+                        "right": "1",
+                        "locations": [
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                        ],
+                        "doors": [{
+                            "x": 42.5, 
+                            "y": 70, 
+                            "roomIndex": 4,
+                            "view" : 0
+                        }]
+                    },
+                    {
+                        "name": "1",
                         "left": "0",
                         "right": "0",
                         "locations": [
-                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
                         ],
-                        "door": {
-                            "x": 50, 
-                            "y": 60, 
-                            "roomIndex": 0
-                        }
+                        "doors": [{
+                            "x": 45, 
+                            "y": 70, 
+                            "roomIndex": 1,
+                            "view" : 0
+                        }]
+                    }
+                ]
+            },
+            {
+                "name": "bathroom",
+                "views": [
+                    {
+                        "name": "0",
+                        "left": "1",
+                        "right": "1",
+                        "locations": [
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                        ],
+                        "doors": [{
+                            "x": 90, 
+                            "y": 83, 
+                            "roomIndex": 3,
+                            "view" : 1
+                        }]
                     }
                 ]
             }
+
+            
         ]           
     }
 ]

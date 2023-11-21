@@ -40,16 +40,16 @@ async function displaySequence() {
         const color = sequence[i];
 
         startButton.style.backgroundColor = '#000';
-        await delay(150);
+        await delay(200);
 
         startButton.style.backgroundColor = color;
-        await delay(500);
+        await delay(750);
     }
 
     setTimeout(() => {
         isPlayerTurn = true;
         startButton.style.backgroundColor = '';
-    }, sequence.length * 1000);
+    }, 1000);
 }
 
 colorButtons.forEach(button => {
@@ -76,7 +76,7 @@ function checkPlayerInput() {
             }, 1000);
         }
     } else {
-        alert('Game Over! Try again.');
+        alert('Erreur! Essaie encore.');
         round = 1;
     }
     sequence.length = 0;

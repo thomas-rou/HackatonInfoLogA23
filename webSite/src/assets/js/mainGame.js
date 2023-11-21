@@ -12,7 +12,7 @@ let monsterLocation = {
 };
 
 const newUser = {
-    "room" : 0,
+    "room" : 2,
     "view" : 0,
     "monster" : 0
 };
@@ -46,9 +46,11 @@ function generateView(){
     }
 
     // Add door 
-    const door = house[user.room].views[user.view].door;
-    if(door) {
-        generateDoor(door.x, door.y, door.roomIndex);
+    const doors = house[user.room].views[user.view].doors;
+    if (doors) {
+        doors.forEach(function(door) {
+            generateDoor(door.x, door.y, door.roomIndex, door.view);
+        });
     }
 
 }
@@ -92,20 +94,21 @@ function removeObjects() {
 }
 
 function removeDoor(){
-    let door = document.getElementById("door");
-    if (door) {
-        door.parentNode.removeChild(door);
+    let doors = document.getElementsByClassName("door");
+    if (doors) {
+        let doorsArray = Array.from(doors);
+
+        doorsArray.forEach(function(door) {
+            door.parentNode.removeChild(door);
+        });   
     }
 }
 
-function generateDoor(x, y, roomIndex){
+function generateDoor(x, y, roomIndex, view){
      // Create a div element
      var iconElement = document.createElement('iconify-icon');
-     iconElement.id = "door"
-
-     // Set the icon attribute
+     iconElement.classList.add("door");
  
-     iconElement.style.width = '100';
 
      // Set the x and y position of the icon
      iconElement.style.position = 'absolute';
@@ -113,8 +116,8 @@ function generateDoor(x, y, roomIndex){
      iconElement.style.top = y+'%';
 
      iconElement.setAttribute('icon', 'fa6-solid:door-open');
-     iconElement.setAttribute('width', '7em');
-
+     iconElement.setAttribute('width', '100%');
+     iconElement.style.width = '10%';
 
 
      iconElement.style.color = 'white';
@@ -122,7 +125,7 @@ function generateDoor(x, y, roomIndex){
      // Attach a click event listener to the monster image
      iconElement.addEventListener("click", function() {
         user.room = roomIndex;
-        user.view = 0;
+        user.view = view;
         generateImgRoom()
         generateView();
      });

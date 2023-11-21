@@ -11,7 +11,8 @@ let monsterLocation = {
 
 let user = {
     "room" : 0,
-    "view" : 0
+    "view" : 0,
+    "monster" : 0
 }
 
 // Preload images
@@ -117,6 +118,7 @@ function addMonster(x, y, width, height) {
     // Attach a click event listener to the monster image
     monsterImg.addEventListener("click", function() {
         // Convert the user object to a JSON string
+        user.monster++;
         let userJSON = JSON.stringify(user);
         localStorage.setItem("userData", userJSON);
 
@@ -237,7 +239,11 @@ window.onload = () => {
         if (storedUserJSON !== null) {
             user = JSON.parse(storedUserJSON);
             console.log("has a local storage");
+        }
 
+        console.log("Nombre de monstres vaincus : ", user.monster);
+        if(user.monster >= 3){
+            window.location.href = "endStory.html"
         }
 
         generateImgRoom()
@@ -247,7 +253,7 @@ window.onload = () => {
     .catch(error => {
         console.error('Error in fetchData:', error);
     });
-    
+
     makeDraggableRightOnly()
 };
 

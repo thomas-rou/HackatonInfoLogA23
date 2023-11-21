@@ -6,14 +6,16 @@ let monsterLocation = {
     "room": 0,
     "view": 0,
     "location": null,
-    "monsterImg": ""
+    "monsterIndex": 0
 }
 
-let user = {
+const newUser = {
     "room" : 0,
     "view" : 0,
     "monster" : 0
 }
+
+let user = newUser;
 
 // Preload images
 let imageObjects = []
@@ -90,7 +92,7 @@ function generateMonster() {
     location.monster = true;
 
     let monsterIndex = Math.floor(Math.random() * 5 + 1);
-    monsterLocation.monsterImg = `./assets/png/monster/monster_${monsterIndex}.png`
+    monsterLocation.monsterIndex = monsterIndex;
 
     monsterLocation.location = location;
     monsterLocation.room = randomRoom;
@@ -103,7 +105,7 @@ function addMonster(x, y, width, height) {
     let monsterImg = document.createElement("img");
 
     // Set attributes for the monster image
-    monsterImg.src = monsterLocation.monsterImg; // Replace with the actual path to your monster image
+    monsterImg.src = `./assets/png/monster/monster_${monsterLocation.monsterIndex}.png`; // Replace with the actual path to your monster image
     monsterImg.alt = "Monster Image";
     monsterImg.id = "monster";
 
@@ -122,15 +124,19 @@ function addMonster(x, y, width, height) {
         let userJSON = JSON.stringify(user);
         localStorage.setItem("userData", userJSON);
 
-        let miniGameIndex = Math.floor(Math.random() * 1);
+        let miniGameIndex = Math.floor(Math.random() * 2);
         let miniGamePath = "";
+
         if ( miniGameIndex === 0 ){
             miniGamePath = "typing.html";
+        } else if ( miniGameIndex === 1 ) {
+            miniGamePath = "patternGame.html";
         }
 
         // Delay the navigation by 100 milliseconds (adjust as needed)
         setTimeout(function() {
-            window.location.href = miniGamePath;
+            window.location.href = miniGamePath + "?monsterIndex=" + encodeURIComponent(monsterLocation.monsterIndex) 
+            + "&roomIndex=" + encodeURIComponent(user.room) + "&view=" + encodeURIComponent(user.view);
         }, 10);
     });
 
@@ -243,6 +249,9 @@ window.onload = () => {
 
         console.log("Nombre de monstres vaincus : ", user.monster);
         if(user.monster >= 3){
+            let userJSON = JSON.stringify(newUser);
+            localStorage.setItem("userData", userJSON);
+            
             window.location.href = "endStory.html"
         }
 

@@ -85,8 +85,9 @@ function displayWord() {
 }
 
 function displayMonster() {
-  const monster = getRandomMonster();
-  document.getElementById('monster').src = `./assets/png/monster//${monster}`;
+  const urlParams = new URLSearchParams(window.location.search);
+  const monsterIndex = urlParams.get("monsterIndex");
+  document.getElementById('monster').src = `./assets/png/monster/monster_${monsterIndex}.png`;
 }
 
 function displayWritten(char) {

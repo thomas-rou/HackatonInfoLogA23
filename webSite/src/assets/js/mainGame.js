@@ -107,10 +107,7 @@ function generateDoor(x, y, roomIndex, view){
      // Create a div element
      var iconElement = document.createElement('iconify-icon');
      iconElement.classList.add("door");
-
-     // Set the icon attribute
  
-     iconElement.style.width = '100';
 
      // Set the x and y position of the icon
      iconElement.style.position = 'absolute';
@@ -118,8 +115,8 @@ function generateDoor(x, y, roomIndex, view){
      iconElement.style.top = y+'%';
 
      iconElement.setAttribute('icon', 'fa6-solid:door-open');
-     iconElement.setAttribute('width', '7em');
-
+     iconElement.setAttribute('width', '100%');
+     iconElement.style.width = '10%';
 
 
      iconElement.style.color = 'white';

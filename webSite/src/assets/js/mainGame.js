@@ -37,15 +37,20 @@ function generateView(){
     const imgElement = document.getElementById('img');
     imgElement.src = imageObjects[user.view].src;
 
-    //Add monster
+    // Add monster
     if (user.room === monsterLocation.room && user.view === monsterLocation.view) {
         let location = monsterLocation.location;
         addMonster(location.x, location.y, location.height, location.width);
     }
 
+    // Add door 
+    console.log(house[user.room].views[user.view]);
+    generateDoor();
+
 }
 
-function switchView(direction){
+function switchView(direction, event){
+    event.stopPropagation();
     if (direction === 'left') {
         user.view = (user.view - 1 + images.length) % images.length;
     } else if (direction === 'right') {
@@ -80,6 +85,36 @@ function removeObjects() {
     if (monsterImg) {
         monsterImg.parentNode.removeChild(monsterImg);
     }
+}
+
+function removeDoor(){
+
+}
+
+function generateDoor(x, y, width, height, nextRoom){
+     // Create a div element
+     let doorImg = document.createElement("img");
+
+     // Set attributes for the monster image
+     doorImg.src = `./assets/png/monster/monster_${monsterLocation.monsterIndex}.png`; // Replace with the actual path to your monster image
+     doorImg.alt = "Monster Image";
+     doorImg.id = "monster";
+ 
+      // Set the size of the monster image
+      doorImg.style.width =  Math.min(width, height) + "%"; // Adjust the width as needed
+     
+     // Set the style attributes to position the monster based on x and y values
+     doorImg.style.position = "absolute";
+     doorImg.style.left = x + "%";
+     doorImg.style.top = y + "%";
+ 
+     // Attach a click event listener to the monster image
+     doorImg.addEventListener("click", function() {
+
+     });
+ 
+     // Append the monster image to the body
+     document.getElementById("container").appendChild(doorImg); 
 }
 
 function generateMonster() {
@@ -142,7 +177,7 @@ function addMonster(x, y, width, height) {
     });
 
     // Append the monster image to the body
-    document.body.appendChild(monsterImg);
+    document.getElementById("container").appendChild(monsterImg); 
 }
 
 async function fetchData() {

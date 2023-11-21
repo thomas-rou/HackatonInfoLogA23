@@ -156,15 +156,15 @@ document.addEventListener("DOMContentLoaded", function() {
     function addMuteButton() {
         const muteButton = document.createElement("button");
         muteButton.id = "muteButton";
-        muteButton.textContent = "Désactiver le son";
+        muteButton.textContent = "Sourdine";
         muteButton.classList.add("muteButton");
         muteButton.addEventListener("click", function () {
             if (backgroundMusic.volume === 0) {
                 backgroundMusic.volume = 1;
-                muteButton.textContent = "Désactiver le son";
+                muteButton.textContent = "Sourdine";
             } else {
                 backgroundMusic.volume = 0;
-                muteButton.textContent = "Activer le son";
+                muteButton.textContent = "Retirer sourdine";
             }
         });
         audioControl.appendChild(muteButton);

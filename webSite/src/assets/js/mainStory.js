@@ -38,11 +38,11 @@ document.addEventListener("DOMContentLoaded", function() {
     let wordIndex = 0;
     let letterIndex = 0;
     let sentenceTimeoutId = null;
-    const letterAppearTime = 50;
-    const wordAppearTime = 500;
-    const sentenceFadeOutTime = 2000;
-    const storyFadeOutTime = 2000;
-    const storyFadeInTime = 2000;
+    const letterAppearTime = 40;
+    const wordAppearTime = 400;
+    const sentenceFadeOutTime = 1800;
+    const storyFadeOutTime = 1800;
+    const storyFadeInTime = 1800;
     const skipButtonFadeOutTime = 1000;
 
     function showNextLetter(words, storyElement) {

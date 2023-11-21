@@ -22,7 +22,7 @@ body {
     align-items: center;
 }
 
-#background {
+#background, #bedroom {
     position: absolute;
     top: 0;
     left: 0;
@@ -31,7 +31,7 @@ body {
     z-index: 1;
 }
 
-.container {
+.container, .instructions-container {
     width: 400px;
     margin: 0 auto;
     padding: 20px;
@@ -41,6 +41,47 @@ body {
     text-align: center;
     opacity: 0;
     z-index: 2;
+}
+
+.instructions-container {
+    width : 750px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'VT323', monospace;
+    font-size: 40px;
+    position: fixed;
+    bottom: 0;
+    cursor:default;
+}
+
+#back {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #3a86ff;
+    width: 175px;
+    height: 25px;
+    position: fixed;
+    top: 2vh;
+    left: 2vh;
+    font-family: 'VT323', monospace;
+    font-size: 25px;
+    cursor:default;
+}
+
+#backButton {
+    width: 2vw;
+}
+
+.side-containers {
+    cursor: pointer;
+    width: 10vw;
+}
+
+#left {
+    display: none;
 }
 
 h1 {

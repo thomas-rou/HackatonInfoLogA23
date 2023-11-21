@@ -122,8 +122,8 @@ function generateMonster() {
     let room = house[randomRoom];
     let randomView = Math.floor(Math.random() * room.views.length);
     let view = room.views[randomView];
-    let radomLocation = Math.floor(Math.random() * view.locations.length);
-    let location = view.locations[radomLocation]
+    let randomLocation = Math.floor(Math.random() * view.locations.length);
+    let location = view.locations[randomLocation]
     location.monster = true;
 
     let monsterIndex = Math.floor(Math.random() * 5 + 1);

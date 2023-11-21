@@ -48,6 +48,10 @@
   grid-column: span 12;
 }
 
+.key__logo {
+  background-color: transparent;
+}
+
 .key__logo > img {
   flex-shrink: 0;
   width: 3em;

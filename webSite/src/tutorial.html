@@ -1,1 +1,31 @@
-Tutorial!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chasseur de monstres</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+    <script src="assets/js/tutorial.js" defer></script>
+
+</head>
+<body class="pageCenter">
+    <img src="assets/png/bedroom/1.png" alt="bedroom" id="bedroom">
+    <div class="container" id="back">
+        <div id="backButton"> &#9665; </div>
+        <p>Retour au menu</p>
+    </div>
+    <div class="instructions-container">
+        <div class="side-containers" onclick="previous()">
+            <div id="left"> &#9665; </div>
+        </div>
+        <div class="instruction" data-sequence="1">
+            <p>Utilise les flèches pour explorer la maison</p>
+        </div>
+        <div class="side-containers" onclick="next()">
+            <div id="right"> &#9655; </div>
+        </div>
+    </div>
+
+</body>
+</html>

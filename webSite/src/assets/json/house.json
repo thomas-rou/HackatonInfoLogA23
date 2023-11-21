@@ -2,7 +2,8 @@
     {
         "user": {
             "room" : 0,
-            "view" : 0
+            "view" : 0,
+            "monster" : 0
         },
         "rooms" : [
             {

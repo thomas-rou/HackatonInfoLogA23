@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function addSkipButton() {
         const skipButton = document.createElement("button");
         skipButton.id = "skipButton";
-        skipButton.textContent = "Skip Story" + "\u2192";
+        skipButton.textContent = "Sauter la conclusion" + "\u2192";
         skipButton.classList.add("skipButton");
         skipButton.addEventListener('click', function() {
             sentenceIndex = storySentences.length + 1;
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function addPlayButton() {
         const playButton = document.createElement("button");
         playButton.id = "playButton";
-        playButton.textContent = "Play music";
+        playButton.textContent = "Jouer la musique";
         playButton.classList.add("playButton");
         playButton.addEventListener("click", function () {
             backgroundMusic.play();
@@ -158,15 +158,15 @@ document.addEventListener("DOMContentLoaded", function() {
     function addMuteButton() {
         const muteButton = document.createElement("button");
         muteButton.id = "muteButton";
-        muteButton.textContent = "Mute";
+        muteButton.textContent = "Sourdine";
         muteButton.classList.add("muteButton");
         muteButton.addEventListener("click", function () {
             if (backgroundMusic.volume === 0) {
                 backgroundMusic.volume = 1;
-                muteButton.textContent = "Mute";
+                muteButton.textContent = "Sourdine";
             } else {
                 backgroundMusic.volume = 0;
-                muteButton.textContent = "Unmute";
+                muteButton.textContent = "Retirer sourdine";
             }
         });
         audioControl.appendChild(muteButton);

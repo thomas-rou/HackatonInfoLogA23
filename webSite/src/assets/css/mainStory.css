@@ -67,7 +67,7 @@ body {
 
 .story {
     font-family: 'IM Fell DW Pica', serif;
-    font-size: 48px;
+    font-size: 6em;
     color: white;
     text-align: center;
 }
@@ -106,12 +106,15 @@ body {
 
 #audioControl {
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 0.7em;
+    left: 0.7em;
+    display: flex;
+    flex-direction: column;
 }
 
 #muteButton, #playButton {
     font-family: 'IM Fell DW Pica', serif;
+    font-size: 2em;
     opacity: 0;
     transition: opacity 0.5s;
     cursor: pointer;
@@ -121,7 +124,7 @@ body {
 }
 
 #muteButton {
-    margin-right: 10px; /* Adjust as needed */
+    margin-right: 0.625em; /* Adjust as needed */
 }
 
 #playButton {
@@ -131,8 +134,9 @@ body {
 #skipButton {
     position: fixed;
     font-family: 'IM Fell DW Pica', serif;
-    bottom: 10px;
-    right: 10px;
+    font-size: 2em;
+    bottom: 0.625em;
+    right: 0.625em;
     opacity: 0;
     transition: opacity 0.5s;
     cursor: pointer;

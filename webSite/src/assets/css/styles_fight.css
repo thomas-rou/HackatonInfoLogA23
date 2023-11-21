@@ -21,10 +21,14 @@ body::before {
 
 #main {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-height: calc(100vh - 40vh);
     position: relative;
     z-index: 1; /* Ensure the main content appears above the blurred background */
 }
+
 #main > article {
     flex: 1;
 }
@@ -47,7 +51,7 @@ header, footer {
 }
 
 header {
-    border-bottom: 5px solid black; 
+    border-bottom: solid black; 
 }
 
 footer {
@@ -65,7 +69,7 @@ h2 {
 #targetWord, #wordWritten {
     font-size: 24px;
     padding: 10px;
-
+    width: 75vw;
     display: flex;
     align-items: center; /* Center vertically */
     justify-content: center; /* Center horizontally */
@@ -108,22 +112,9 @@ h2 {
 }
 
 /*patternGame*/
-.button-container {
-    display: center;
-    margin: auto;
-}
-
-.row {
-    display: grid;
-    grid-template-columns: repeat(2, 150px);
-    gap: 100px;
-    margin: 50px;
-    justify-content: center;
-}
-
 .color-button {
-    width: 160px;   
-    height: 160px;
+    width: 15vw;   
+    height: 15vw;
 }
 
 .color-button:hover {
@@ -133,11 +124,8 @@ h2 {
 }
 
 #blue {
-    background-color: #4361EE;
+    background-color: #4CC9F0;
     border-radius: 100%;
-} 
-.blue-click{
-    background-color: rgb(150,255,150) !important;
 }
 
 #pink {
@@ -145,46 +133,52 @@ h2 {
     border-radius: 100%;
 }
 
-.pink-click{
-    background-color: rgb(255,150,150) !important;
-}
-
 #yellow { 
     background-color: #FFBE0B; 
     border-radius: 100%;
-}
-.yellow-click {
-    background-color: rgb(255,255,150) !important;
 }
 #purple {
     background-color: #8338EC;
     border-radius: 100%;
 }
-.purple-click{
-    background-color: rgb(150,150,255) !important;
-}
 
-.start-button {
-    /*
-    padding: 10px;
-    font-size: 10px;
-    cursor: pointer;
-    */
-    background-color: rgb(25, 25, 25);
+#start {
+    background-color: rgb(219, 219, 219);
     border-radius: 100%;
-    box-shadow: 0 0 50px;
-    height: 100px;
-    width: 100px;
+    box-shadow: 0 0 50px #aeacac;
+    height: 20vw;
+    width: 20vw;
     margin: auto;
     text-align: center;
     justify-content: center;
+    font-family: 'VT323', monospace;
+    font-size: 50px;
+    font-weight: 400;
 }
 
-p{
-    color:white;
-    font-size: 35px;
-    font-weight: 400;
+#instructions {
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    background-color: #3A0CA3;
+    padding: 5px;
+    font-size: 22px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    height: 80vh;
+}
+
+.grid-item {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-container > :nth-child(3) {
+    grid-row: span 2;
 }

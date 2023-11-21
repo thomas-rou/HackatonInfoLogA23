@@ -1,6 +1,13 @@
 
 let currentImageIndex = 0;
 
+let monsterLocation = {
+    "room": 0,
+    "view": 0,
+    "location": null,
+    "monsterIndex": 1 // TEMP
+}
+
 // Function to switch the image
 function switchImage(direction) {
     const imgElement = document.getElementById('img');
@@ -36,39 +43,50 @@ function removeMonster() {
     }
 }
 
-function addMonster(x, y) {
+function addMonster(x, y, width, height) {
+
     // Create a new img element
     let monsterImg = document.createElement("img");
 
     // Set attributes for the monster image
-    monsterImg.src = "./assets/png/monster/monster_1.png"; // Replace with the actual path to your monster image
+    monsterImg.src = `./assets/png/monster/monster_${monsterLocation.monsterIndex}.png`; // Replace with the actual path to your monster image
     monsterImg.alt = "Monster Image";
     monsterImg.id = "monster";
 
-     // Set the size of the monster image
-     monsterImg.style.width = "50px"; // Adjust the width as needed
-     monsterImg.style.height = "50px"; // Adjust the height as needed
+    // Set the size of the monster image
+    monsterImg.style.height =  Math.min(width, height) * 8/10 + "%"; // Adjust the width as needed
     
     // Set the style attributes to position the monster based on x and y values
     monsterImg.style.position = "absolute";
-    monsterImg.style.left = x + "%";
-    monsterImg.style.top = y + "%";
+    monsterImg.style.left = (x + width/2) + "%";
+    monsterImg.style.top = (y + height/2) + "%";
 
     // Attach a click event listener to the monster image
     monsterImg.addEventListener("click", function() {
-        removeMonster();
-        let randomX = Math.random() * 100;
-        let randomY = Math.random() * 100;
-        addMonster(randomX, randomY);
+        // Convert the user object to a JSON string
+        user.monster++;
+        let userJSON = JSON.stringify(user);
+        sessionStorage.setItem("userData", userJSON);
+
+        let miniGameIndex = Math.floor(Math.random() * 2);
+        let miniGamePath = "";
+
+        if ( miniGameIndex === 0 ){
+            miniGamePath = "typing.html";
+        } else if ( miniGameIndex === 1 ) {
+            miniGamePath = "pattern.html";
+        }
 
         // Delay the navigation by 100 milliseconds (adjust as needed)
         setTimeout(function() {
-            window.location.href = "typing.html";
+            
+            window.location.href = miniGamePath + "?monsterIndex=" + encodeURIComponent(monsterLocation.monsterIndex) 
+            + "&roomName=" + encodeURIComponent(house[user.room].name) + "&viewIndex=" + encodeURIComponent(user.view);
         }, 10);
     });
 
     // Append the monster image to the body
-    document.body.appendChild(monsterImg);
+    document.getElementById("container").appendChild(monsterImg); 
 }
 
 function makeDraggable() {
@@ -130,25 +148,35 @@ function makeDraggableRightOnly() {
         checkEvidence();
     })
 
-    document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-            const xDiff = (e.clientX - initialXpos) / window.innerWidth;
-            const maxoffset = draggableBox.clientWidth / window.innerWidth * 100;
-            if (initialObjectXpos + xDiff >= initialObjectXpos) {
-                tireImg.style.left = `${Math.min((initialObjectXpos + xDiff) * 100, initialObjectXpos * 100 + maxoffset)}%`;
-            } else {
-                tireImg.style.left = `${initialObjectXpos * 100}%`;
-            }
-        }
-    });
-
-    document.addEventListener('mouseup', () => {
+    const mouseupHandler =  () => {
         isDragging = false;
         inEvidence--;
         checkEvidence();
         tireImg.style.left = `${initialObjectXpos * 100}%`;
+    };
 
-    });
+    const mousemoveHandler = (e) => {
+        if (isDragging) {
+            const xDiff = (e.clientX - initialXpos) / window.innerWidth;
+            const maxOffset = draggableBox.clientWidth / window.innerWidth * 100;
+            if (initialObjectXpos + xDiff >= initialObjectXpos) {
+                if (initialObjectXpos * 100 + maxOffset <= (initialObjectXpos + xDiff) * 100) {
+                    tireImg.style.left = `${initialObjectXpos * 100 + maxOffset}%`;
+                    document.removeEventListener('mousemove', mousemoveHandler);
+                    document.removeEventListener('mouseup', mouseupHandler)
+                    window.location.href = "typing.html"; // TEMPORARY
+                } else { 
+                    tireImg.style.left = `${(initialObjectXpos + xDiff) * 100}%`;
+                }
+            } else {
+                tireImg.style.left = `${initialObjectXpos * 100}%`;
+            }
+        }
+    };
+
+    document.addEventListener('mousemove', mousemoveHandler);
+    document.addEventListener('mouseup', mouseupHandler);
+
 
     function checkEvidence()
     {
@@ -172,6 +200,7 @@ window.onload = () => {
     // let randomX = Math.random() * 100;
     // let randomY = Math.random() * 100;
     // addMonster(randomX, randomY);
+    addMonster(5.1, 38, 14.5, 8.8); // data from tire 
     makeDraggableRightOnly()
 };
 

@@ -1,23 +1,24 @@
 // Array of image file names
 const images = ['0_light.png', '1_light.png', '2_light.png', '3_light.png'];
+
+// Représente l'array JSON. Pense pas que c'est une bonne méthode d'implémentation
 let house;
 
 let monsterLocation = {
-    "room": 0,
-    "view": 0,
-    "location": null,
-    "monsterIndex": 0
-}
+    "roomIndex": null,
+    "viewIndex": null,
+    "position": null,
+    "monsterIndex": null
+};
 
 const newUser = {
     "room" : 0,
     "view" : 0,
     "monster" : 0
-}
+};
 
 let user = newUser;
 
-// Preload images
 let imageObjects = []
 
 function generateImgRoom() {
@@ -39,9 +40,9 @@ function generateView(){
     imgElement.src = imageObjects[user.view].src;
 
     // Add monster
-    if (user.room === monsterLocation.room && user.view === monsterLocation.view) {
-        let location = monsterLocation.location;
-        addMonster(location.x, location.y, location.height, location.width);
+    if (user.room === monsterLocation.roomIndex && user.view === monsterLocation.viewIndex) {
+        let position = monsterLocation.position;
+        addMonster(position.x, position.y, position.height, position.width);
     }
 
     // Add door 
@@ -132,24 +133,22 @@ function generateDoor(x, y, roomIndex){
 
 function generateMonster() {
     let randomRoom = Math.floor(Math.random() * house.length);
-    let room = house[randomRoom];
-    let randomView = Math.floor(Math.random() * room.views.length);
-    let view = room.views[randomView];
-    let randomLocation = Math.floor(Math.random() * view.locations.length);
-    let location = view.locations[randomLocation]
-    location.monster = true;
+    let roomObject = house[randomRoom];
+    let randomView = Math.floor(Math.random() * roomObject.views.length);
+    let viewObject = roomObject.views[randomView];
+    let randomPosition = Math.floor(Math.random() * viewObject.locations.length);
+    let positionObject = viewObject.locations[randomPosition];
 
-    let monsterIndex = Math.floor(Math.random() * 5 + 1);
-    monsterLocation.monsterIndex = monsterIndex;
+    let randomMonster = Math.floor(Math.random() * 5 + 1); // hardcoded
 
-    monsterLocation.location = location;
-    monsterLocation.room = randomRoom;
-    monsterLocation.view = randomView;
+    monsterLocation.roomIndex = randomRoom;
+    monsterLocation.viewIndex = randomView;
+    monsterLocation.position = positionObject;
+    monsterLocation.monsterIndex = randomMonster;
 }
 
 function addMonster(x, y, width, height) {
 
-    // Create a new img element
     let monsterImg = document.createElement("img");
 
     // Set attributes for the monster image
@@ -157,13 +156,13 @@ function addMonster(x, y, width, height) {
     monsterImg.alt = "Monster Image";
     monsterImg.id = "monster";
 
-     // Set the size of the monster image
-     monsterImg.style.width =  Math.min(width, height) + "%"; // Adjust the width as needed
+    // Set the size of the monster image
+    monsterImg.style.height =  Math.min(width, height) * 8/10 + "%"; // Adjust the width as needed
     
     // Set the style attributes to position the monster based on x and y values
     monsterImg.style.position = "absolute";
-    monsterImg.style.left = x + "%";
-    monsterImg.style.top = y + "%";
+    monsterImg.style.left = (x + width / 2) + "%";
+    monsterImg.style.top = (y + height / 2) + "%";
 
     // Attach a click event listener to the monster image
     monsterImg.addEventListener("click", function() {
@@ -245,44 +244,78 @@ function makeDraggable() {
 }
 
 function makeDraggableRightOnly() {
-    //const draggableBox = document.getElementById('tire');
-    const draggableBox = document.getElementById('draggableBox');
-    //draggableBox.style.left = "100px"
+    const tireImg = document.getElementById('tire');
+    const draggableBox = document.getElementsByClassName('draggable')[0]; // objet invisible entourant l'endroit de la sélection
 
     let isDragging = false;
+    let inEvidence = 0;
     let initialObjectXpos, initialXpos;
+
 
     draggableBox.addEventListener('mousedown', (e) => {
         isDragging = true;
-
-        initialObjectXpos = draggableBox.offsetLeft;
+        inEvidence++;
+        checkEvidence();
+        initialObjectXpos = 0.5;
         initialXpos = e.clientX;
     });
 
-    document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-            const xDiff = e.clientX - initialXpos;
-            
-            if (initialObjectXpos + xDiff >= initialObjectXpos) {
-                draggableBox.style.left = `${initialObjectXpos + xDiff}px`;
-            } else { 
-                draggableBox.style.left = `${initialObjectXpos}px`;
-            }
-        }
+    draggableBox.addEventListener('mouseover', (e) => {
+        inEvidence++;
+        checkEvidence();
     });
 
-    document.addEventListener('mouseup', () => {
+    draggableBox.addEventListener('mouseleave', (e) => {
+        inEvidence--;
+        checkEvidence();
+    })
+
+    const mouseupHandler =  () => {
         isDragging = false;
-        draggableBox.style.left = `${initialObjectXpos}px`; // Si le monstre est découvert, ne pas faire?
-    });
+        inEvidence--;
+        checkEvidence();
+        tireImg.style.left = `${initialObjectXpos * 100}%`;
+    };
+
+    const mousemoveHandler = (e) => {
+        if (isDragging) {
+            const xDiff = (e.clientX - initialXpos) / window.innerWidth;
+            const maxOffset = draggableBox.clientWidth / window.innerWidth * 100;
+            if (initialObjectXpos + xDiff >= initialObjectXpos) {
+                if (initialObjectXpos * 100 + maxOffset <= (initialObjectXpos + xDiff) * 100) {
+                    tireImg.style.left = `${initialObjectXpos * 100 + maxOffset}%`;
+                    document.removeEventListener('mousemove', mousemoveHandler);
+                    document.removeEventListener('mouseup', mouseupHandler)
+                    window.location.href = "typing.html"; // TEMPORARY
+                } else { 
+                    tireImg.style.left = `${(initialObjectXpos + xDiff) * 100}%`;
+                }
+            } else {
+                tireImg.style.left = `${initialObjectXpos * 100}%`;
+            }
+        }
+    };
+
+    document.addEventListener('mousemove', mousemoveHandler);
+    document.addEventListener('mouseup', mouseupHandler);
+
+
+    function checkEvidence()
+    {
+        if (inEvidence <= 0)
+        {
+            inEvidence = 0;
+            tireImg.style.filter = 'brightness(100%)';
+        } else {
+            tireImg.style.filter = 'brightness(150%)';
+        }
+    }
 }
 
 // Initial update on page load
 window.onload = () => {
     updateContainerSize();
     removeMonster();
-    console.log("test1");
-
 
     fetchData().then(data => {
         house = data[0].rooms;

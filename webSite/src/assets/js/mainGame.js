@@ -22,7 +22,7 @@ let imageObjects = []
 
 function generateImgRoom() {
     imageObjects = [];
-    for (let i = 0; i <= 3; i++) {
+    for (let i = 0; i < house[user.room].views.length; i++) {
         const image = new Image();
         image.src = `assets/png/${house[user.room].name}/${i}.png`;   
         imageObjects.push(image)
@@ -47,17 +47,17 @@ function generateView(){
     // Add door 
     const door = house[user.room].views[user.view].door;
     if(door) {
-        generateDoor(door.x, door.y, door.room);
+        generateDoor(door.x, door.y, door.roomIndex);
     }
 
 }
 
-function switchView(direction, event){
-    event.stopPropagation();
+function switchView(direction){
+    const length = house[user.room].views.length;
     if (direction === 'left') {
-        user.view = (user.view - 1 + images.length) % images.length;
+        user.view = (user.view - 1 + length) % length;
     } else if (direction === 'right') {
-        user.view= (user.view + 1) % images.length;
+        user.view= (user.view + 1) % length;
     }
     generateView();
 }
@@ -97,7 +97,7 @@ function removeDoor(){
     }
 }
 
-function generateDoor(x, y, nextRoom){
+function generateDoor(x, y, roomIndex){
      // Create a div element
      var iconElement = document.createElement('iconify-icon');
      iconElement.id = "door"
@@ -120,7 +120,10 @@ function generateDoor(x, y, nextRoom){
 
      // Attach a click event listener to the monster image
      iconElement.addEventListener("click", function() {
-
+        user.room = roomIndex;
+        user.view = 0;
+        generateImgRoom()
+        generateView();
      });
  
      // Append the monster image to the body

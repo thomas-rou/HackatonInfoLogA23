@@ -41,7 +41,7 @@
                         "door": {
                             "x": 10, 
                             "y": 5, 
-                            "room": "stair_up"
+                            "roomIndex": 1
                         }
                     },
                     {
@@ -53,6 +53,92 @@
                             {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
                             {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
                         ]
+                    }
+                ]
+            },
+            {
+                "name": "stair_up",
+                "views": [
+                    {
+                        "name": "0",
+                        "left": "0",
+                        "right": "0",
+                        "locations": [
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                        ],
+                        "door": {
+                            "x": 45, 
+                            "y": 5, 
+                            "roomIndex": 2
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "bedroom",
+                "views": [
+                    {
+                        "name": "0",
+                        "left": "3",
+                        "right": "1",
+                        "locations": [
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                        ]
+                    },
+                    {
+                        "name": "1",
+                        "left": "0",
+                        "right": "2",
+                        "locations": [
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                        ],
+                        "door": {
+                            "x": 80, 
+                            "y": 70, 
+                            "roomIndex": 3
+                        }
+                    },
+                    {
+                        "name": "2",
+                        "left": "1",
+                        "right": "3",
+                        "locations": [
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                        ]
+                    },
+                    {
+                        "name": "3",
+                        "left": "2",
+                        "right": "0",
+                        "locations": [
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 50, "y": 70, "height": 5, "width": 5, "monster" : false, "image":"path"},
+                            {"x": 88, "y": 50, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "stair_down",
+                "views": [
+                    {
+                        "name": "0",
+                        "left": "0",
+                        "right": "0",
+                        "locations": [
+                            {"x": 10, "y": 20, "height": 5, "width": 5, "monster" : false, "image":"path"}
+                        ],
+                        "door": {
+                            "x": 50, 
+                            "y": 60, 
+                            "roomIndex": 0
+                        }
                     }
                 ]
             }

@@ -6,6 +6,14 @@ const words_array = [
   "Enchanté","Petit héros","Fabuleux","Capture","Énergie","Capture d'écran","Éblouissant","Ailes","Poursuite","Bonheur","Adorable"
 ];
 
+const nonAlphanumericKeys = ["Backspace", "Shift", "Enter", "Tab", "CapsLock", "Alt", "Control", "Meta", "Escape",
+  "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Delete", "End", "Home", "PageDown", "PageUp", "Insert",
+  "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "ScrollLock", "Pause", "ContextMenu",
+  "PrintScreen", "NumLock", "Clear", "BrowserBack", "BrowserForward", "BrowserRefresh", "BrowserStop", "BrowserSearch",
+  "BrowserFavorites", "BrowserHome", "VolumeMute", "VolumeDown", "VolumeUp", "MediaTrackNext", "MediaTrackPrevious",
+  "MediaStop", "MediaPlayPause", "Semicolon", "Equal", "Comma", "Minus", "Period", "Slash", "Backquote", "BracketLeft",
+  "Backslash", "BracketRight", "Quote"];
+
 const monster_array = ['monster_1.png', 'monster_2.png', 'monster_3.png', 'monster_4.png', 'monster_5.png']
 
 function getRandomWord() {
@@ -20,8 +28,9 @@ function getRandomMonster() {
 
 let targetWord = getRandomWord();
 let wordsCount = 0;
-const endGameScreenTime = 3000;
+const endGameScreenTime = 5000;
 const maxWords = 5;
+let wrongKeys = 0;
 
 
 // Display the initial word
@@ -55,9 +64,16 @@ function turnKeyToGold() {
 }
 
 function turnKeyRed(pressedKey) {
-  const char = pressedKey.toLocaleUpperCase();
+  let char = pressedKey.toLocaleUpperCase();
   if( document.getElementById(char)){
     document.getElementById(char).style.backgroundColor = "#FF0000";
+  }
+}
+
+function turnKeyPurple(pressedKey) {
+  let char = pressedKey.toLocaleUpperCase();
+  if( document.getElementById(char)){
+    document.getElementById(char).style.backgroundColor = "#6F00FF";
   }
 }
 
@@ -82,11 +98,12 @@ function displayWritten(char) {
 }
 
 function handleEndFight() {
+  document.removeEventListener('keydown', handleKeyPress);
   document.getElementById('overlay').style.display = 'block';
 
   let label = document.createElement('div');
   label.id = 'endLabel';
-  label.innerText = 'You defeated the monster, well done!';
+  label.innerText = 'Vous avez vaincu le monstre, bien joué !' + '\n' + 'Vous avez fait ' + wrongKeys + ' erreurs.';
   document.body.appendChild(label);
 
   setTimeout(function () {
@@ -118,7 +135,13 @@ function handleKeyPress(event) {
       targetWord = getRandomWord();
       displayWord();
     }
+  } else if (nonAlphanumericKeys.includes(typedChar)){
+      turnKeyPurple(typedChar);
+      setTimeout(function () {
+      turnKeyWhite(typedChar);
+    }, 100);
   } else {
+    wrongKeys++;
     turnKeyRed(typedChar);
     setTimeout(function () {
       turnKeyWhite(typedChar);

@@ -122,7 +122,7 @@ function addMonster(x, y, width, height) {
         // Convert the user object to a JSON string
         user.monster++;
         let userJSON = JSON.stringify(user);
-        localStorage.setItem("userData", userJSON);
+        sessionStorage.setItem("userData", userJSON);
 
         let miniGameIndex = Math.floor(Math.random() * 2);
         let miniGamePath = "";
@@ -242,7 +242,7 @@ window.onload = () => {
 
 
         // Retrieve the JSON string from local storage
-        let storedUserJSON = localStorage.getItem("userData");
+        let storedUserJSON = sessionStorage.getItem("userData");
         if (storedUserJSON !== null) {
             user = JSON.parse(storedUserJSON);
             console.log("has a local storage");
@@ -251,7 +251,7 @@ window.onload = () => {
         console.log("Nombre de monstres vaincus : ", user.monster);
         if(user.monster >= 3){
             let userJSON = JSON.stringify(newUser);
-            localStorage.setItem("userData", userJSON);
+            sessionStorage.setItem("userData", userJSON);
             
             window.location.href = "endStory.html"
         }

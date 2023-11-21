@@ -10,7 +10,7 @@ let monsterLocation = {
 }
 
 const newUser = {
-    "room" : 0,
+    "room" : 2,
     "view" : 0,
     "monster" : 0
 }
@@ -45,9 +45,11 @@ function generateView(){
     }
 
     // Add door 
-    const door = house[user.room].views[user.view].door;
-    if(door) {
-        generateDoor(door.x, door.y, door.roomIndex);
+    const doors = house[user.room].views[user.view].doors;
+    if (doors) {
+        doors.forEach(function(door) {
+            generateDoor(door.x, door.y, door.roomIndex, door.view);
+        });
     }
 
 }
@@ -91,16 +93,20 @@ function removeObjects() {
 }
 
 function removeDoor(){
-    let door = document.getElementById("door");
-    if (door) {
-        door.parentNode.removeChild(door);
+    let doors = document.getElementsByClassName("door");
+    if (doors) {
+        let doorsArray = Array.from(doors);
+
+        doorsArray.forEach(function(door) {
+            door.parentNode.removeChild(door);
+        });   
     }
 }
 
-function generateDoor(x, y, roomIndex){
+function generateDoor(x, y, roomIndex, view){
      // Create a div element
      var iconElement = document.createElement('iconify-icon');
-     iconElement.id = "door"
+     iconElement.classList.add("door");
 
      // Set the icon attribute
  
@@ -121,7 +127,7 @@ function generateDoor(x, y, roomIndex){
      // Attach a click event listener to the monster image
      iconElement.addEventListener("click", function() {
         user.room = roomIndex;
-        user.view = 0;
+        user.view = view;
         generateImgRoom()
         generateView();
      });

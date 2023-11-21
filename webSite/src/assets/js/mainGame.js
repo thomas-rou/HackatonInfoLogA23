@@ -5,7 +5,8 @@ let house;
 let monsterLocation = {
     "room": 0,
     "view": 0,
-    "location": null
+    "location": null,
+    "monsterImg": ""
 }
 
 let user = {
@@ -34,8 +35,6 @@ function generateView(){
     imgElement.src = imageObjects[user.view].src;
 
     //Add monster
-    console.log(user);
-    console.log(monsterLocation);
     if (user.room === monsterLocation.room && user.view === monsterLocation.view) {
         let location = monsterLocation.location;
         addMonster(location.x, location.y, location.height, location.width);
@@ -89,6 +88,9 @@ function generateMonster() {
     let location = view.locations[radomLocation]
     location.monster = true;
 
+    let monsterIndex = Math.floor(Math.random() * 5 + 1);
+    monsterLocation.monsterImg = `./assets/png/monster/monster_${monsterIndex}.png`
+
     monsterLocation.location = location;
     monsterLocation.room = randomRoom;
     monsterLocation.view = randomView;
@@ -100,7 +102,7 @@ function addMonster(x, y, width, height) {
     let monsterImg = document.createElement("img");
 
     // Set attributes for the monster image
-    monsterImg.src = "./assets/png/monster/monster_1.png"; // Replace with the actual path to your monster image
+    monsterImg.src = monsterLocation.monsterImg; // Replace with the actual path to your monster image
     monsterImg.alt = "Monster Image";
     monsterImg.id = "monster";
 
@@ -114,6 +116,10 @@ function addMonster(x, y, width, height) {
 
     // Attach a click event listener to the monster image
     monsterImg.addEventListener("click", function() {
+        // Convert the user object to a JSON string
+        let userJSON = JSON.stringify(user);
+        localStorage.setItem("userData", userJSON);
+
         let miniGameIndex = Math.floor(Math.random() * 1);
         let miniGamePath = "";
         if ( miniGameIndex === 0 ){
@@ -218,10 +224,22 @@ function makeDraggableRightOnly() {
 window.onload = () => {
     updateContainerSize();
     removeMonster();
+    console.log("test1");
 
-    fetchData() .then(data => {
+
+    fetchData().then(data => {
         house = data[0].rooms;
         user =  data[0].user;
+
+
+        // Retrieve the JSON string from local storage
+        let storedUserJSON = localStorage.getItem("userData");
+        if (storedUserJSON !== null) {
+            user = JSON.parse(storedUserJSON);
+            console.log("has a local storage");
+
+        }
+
         generateImgRoom()
         generateMonster()
         generateView();
@@ -229,11 +247,7 @@ window.onload = () => {
     .catch(error => {
         console.error('Error in fetchData:', error);
     });
-
-    // Example usage: addMonster with random x and y values between 0 and 100
-    let randomX = Math.random() * 100;
-    let randomY = Math.random() * 100;
-    addMonster(randomX, randomY);
+    
     makeDraggableRightOnly()
 };
 

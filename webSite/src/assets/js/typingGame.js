@@ -33,14 +33,6 @@ const maxWords = 5;
 let wrongKeys = 0;
 
 
-// Display the initial word
-displayBackground()
-displayWord();
-displayMonster();
-
-// Listen for key presses
-document.addEventListener('keydown', handleKeyPress);
-
 function turnKeysToWhite() {
   const letterKeyElements = document.getElementsByClassName("letter");
   const letterKeyArray = Array.from(letterKeyElements);
@@ -88,6 +80,7 @@ function displayBackground(){
   const newBackgroundImageURL = `url(../png/${room}/${view}.png)`;
   body.style.setProperty('--before-background-image', newBackgroundImageURL);
 }
+
 
 function displayWord() {
   document.getElementById('targetWord').textContent = targetWord;
@@ -160,3 +153,13 @@ function handleKeyPress(event) {
     }, 100);
   }
 }
+
+window.onload = () => {
+  // Display the initial word
+  displayBackground();
+  displayWord();
+  displayMonster();
+
+  // Listen for key presses
+  document.addEventListener('keydown', handleKeyPress);
+  }

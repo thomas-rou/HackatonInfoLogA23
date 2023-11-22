@@ -26,23 +26,23 @@ document.addEventListener("DOMContentLoaded", function() {
     // Define the story sentences
     const storySentences = [
         "Il était une fois, alors que la neige recouvrait doucement les rues de la ville de Montréal,",
-        "un jeune enfant découvrit un phénomène étrange dans sa propre maison.",
+        "un petit enfant découvrit quelque chose d'étrange dans sa maison.",
         "Des sons mystérieux résonnaient dans les couloirs sombres,",
-        "et des ombres fugaces dansaient dans les coins oubliés.",
-        "L'enfant se mit alors en quête d'investiguer l'origine de ces perturbations nocturnes.",
-        "Armé de sa ténacité et de son esprit ingénieux,",
-        "il partit pour chasser les monstres mystérieux cachés dans les recoins de sa maison."
+        "et des ombres dansaient sur les murs.",
+        "Curieux, l'enfant décida d'investiguer d'où venaient ces mystères de la nuit.",
+        "Avec sa détermination et son esprit astucieux,",
+        "il partit à la chasse aux monstres mystérieux cachés dans les coins de sa maison."
       ];
 
     let sentenceIndex = 0;
     let wordIndex = 0;
     let letterIndex = 0;
     let sentenceTimeoutId = null;
-    const letterAppearTime = 50;
-    const wordAppearTime = 500;
-    const sentenceFadeOutTime = 2000;
-    const storyFadeOutTime = 2000;
-    const storyFadeInTime = 2000;
+    const letterAppearTime = 40;
+    const wordAppearTime = 400;
+    const sentenceFadeOutTime = 1800;
+    const storyFadeOutTime = 1800;
+    const storyFadeInTime = 1800;
     const skipButtonFadeOutTime = 1000;
 
     function showNextLetter(words, storyElement) {
@@ -197,4 +197,3 @@ document.addEventListener("DOMContentLoaded", function() {
         showNextSentence();
     }, storyFadeInTime);
 });
-

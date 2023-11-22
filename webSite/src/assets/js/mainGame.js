@@ -24,7 +24,7 @@ function generateImgRoom() {
     imageObjects = [];
     for (let i = 0; i < house[user.room].views.length; i++) {
         const image = new Image();
-        image.src = `assets/png/${house[user.room].name}/${i}.png`;   
+        image.src = `assets/png/${house[user.room].name}/${i}.png`;
         imageObjects.push(image)
     }
 }
@@ -44,7 +44,7 @@ function generateView(){
         addMonster(location.x, location.y, location.height, location.width);
     }
 
-    // Add door 
+    // Add door
     const doors = house[user.room].views[user.view].doors;
     if (doors) {
         doors.forEach(function(door) {
@@ -99,7 +99,7 @@ function removeDoor(){
 
         doorsArray.forEach(function(door) {
             door.parentNode.removeChild(door);
-        });   
+        });
     }
 }
 
@@ -107,7 +107,7 @@ function generateDoor(x, y, roomIndex, view){
      // Create a div element
      var iconElement = document.createElement('iconify-icon');
      iconElement.classList.add("door");
- 
+
 
      // Set the x and y position of the icon
      iconElement.style.position = 'absolute';
@@ -128,9 +128,9 @@ function generateDoor(x, y, roomIndex, view){
         generateImgRoom()
         generateView();
      });
- 
+
      // Append the monster image to the body
-     document.getElementById("container").appendChild(iconElement); 
+     document.getElementById("container").appendChild(iconElement);
 }
 
 function generateMonster() {
@@ -162,7 +162,7 @@ function addMonster(x, y, width, height) {
 
      // Set the size of the monster image
      monsterImg.style.width =  Math.min(width, height) + "%"; // Adjust the width as needed
-    
+
     // Set the style attributes to position the monster based on x and y values
     monsterImg.style.position = "absolute";
     monsterImg.style.left = x + "%";
@@ -186,14 +186,14 @@ function addMonster(x, y, width, height) {
 
         // Delay the navigation by 100 milliseconds (adjust as needed)
         setTimeout(function() {
-            
-            window.location.href = miniGamePath + "?monsterIndex=" + encodeURIComponent(monsterLocation.monsterIndex) 
+
+            window.location.href = miniGamePath + "?monsterIndex=" + encodeURIComponent(monsterLocation.monsterIndex)
             + "&roomName=" + encodeURIComponent(house[user.room].name) + "&viewIndex=" + encodeURIComponent(user.view);
         }, 10);
     });
 
     // Append the monster image to the body
-    document.getElementById("container").appendChild(monsterImg); 
+    document.getElementById("container").appendChild(monsterImg);
 }
 
 async function fetchData() {
@@ -215,76 +215,10 @@ async function fetchData() {
     });
 }
 
-function makeDraggable() {
-    const draggableBox = document.getElementById('draggableBox');
-
-    let isDragging = false;
-    let initialObjectXpos, initialXpos;
-    let initialObjectYpos, initialYpos;
-
-    draggableBox.addEventListener('mousedown', (e) => {
-        isDragging = true;
-
-        initialObjectXpos = draggableBox.offsetLeft;
-        initialObjectYpos = draggableBox.offsetTop;
-
-        initialXpos = e.clientX
-        initialYpos = e.clientY
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-            const xDiff = e.clientX - initialXpos;
-            const yDiff = e.clientY - initialYpos;
-
-            draggableBox.style.left = `${initialObjectXpos + xDiff}px`;
-            draggableBox.style.top = `${initialObjectYpos + yDiff}px`;
-        }
-    });
-
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-    });
-}
-
-function makeDraggableRightOnly() {
-    //const draggableBox = document.getElementById('tire');
-    const draggableBox = document.getElementById('draggableBox');
-    //draggableBox.style.left = "100px"
-
-    let isDragging = false;
-    let initialObjectXpos, initialXpos;
-
-    draggableBox.addEventListener('mousedown', (e) => {
-        isDragging = true;
-
-        initialObjectXpos = draggableBox.offsetLeft;
-        initialXpos = e.clientX;
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-            const xDiff = e.clientX - initialXpos;
-            
-            if (initialObjectXpos + xDiff >= initialObjectXpos) {
-                draggableBox.style.left = `${initialObjectXpos + xDiff}px`;
-            } else { 
-                draggableBox.style.left = `${initialObjectXpos}px`;
-            }
-        }
-    });
-
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-        draggableBox.style.left = `${initialObjectXpos}px`; // Si le monstre est découvert, ne pas faire?
-    });
-}
-
 // Initial update on page load
 window.onload = () => {
     updateContainerSize();
     removeMonster();
-    console.log("test1");
 
 
     fetchData().then(data => {
@@ -303,7 +237,7 @@ window.onload = () => {
         if(user.monster >= 3){
             let userJSON = JSON.stringify(newUser);
             sessionStorage.setItem("userData", userJSON);
-            
+
             window.location.href = "endStory.html"
         }
 
@@ -314,8 +248,6 @@ window.onload = () => {
     .catch(error => {
         console.error('Error in fetchData:', error);
     });
-
-    makeDraggableRightOnly()
 };
 
 // Update container size on window resize

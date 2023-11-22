@@ -36,8 +36,8 @@ function generateView(){
     removeObjects();
 
     //Change image
-    const imgElement = document.getElementById('img');
-    imgElement.src = imageObjects[user.view].src;
+    const imgElement = document.getElementById('image');
+    imgElement.href = imageObjects[user.view].src;
 
     // Add monster
     if (user.room === monsterLocation.roomIndex && user.view === monsterLocation.viewIndex) {
@@ -192,7 +192,7 @@ function addMonster(x, y, width, height) {
     });
 
     // Append the monster image to the body
-    document.getElementById("container").appendChild(monsterImg);
+    document.getElementByTagName("body").appendChild(monsterImg);
 }
 
 async function fetchData() {

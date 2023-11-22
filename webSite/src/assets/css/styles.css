@@ -85,6 +85,7 @@ svg {
     opacity: 0;
     z-index: 2;
     cursor:default;
+    user-select: none;
 }
 
 .instructions-container {
@@ -122,6 +123,7 @@ svg {
     font-family: 'VT323', monospace;
     font-size: 1.5vw;
     cursor:pointer;
+    user-select: none;
     z-index: 999;
 }
 
@@ -195,13 +197,53 @@ h1 {
     pointer-events: none;
 }
 
+#room-container {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 998;
+}
+
+.room-view  {
+    top: 50%;
+    width: 7vw;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 5vw;
+}
+
+.room-view div  {
+    text-align: center;
+    background-color: #4CC9F0;
+    border-radius: 100%;
+    cursor: pointer;
+    position: fixed;
+    height: 10vh;
+    width:10vh;
+    z-index: 999;
+    opacity: 0;
+}
+
+#leftArrow {
+    left: 2vw;
+}
+
+#rightArrow {
+    right: 2vw;
+}
+
 .spinner {
     opacity: 0;
     border: 1em solid;
     border-color: var(--dark-grey);
     border-radius: 50%;
-    width: 20vh;
-    height: 20vh;
+    width: 10vh;
+    height: 10vh;
     transform: rotate(45deg);
     animation: colorChange 7s linear 1;
 }

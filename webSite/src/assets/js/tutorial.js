@@ -4,6 +4,8 @@ const leftArrow = document.querySelector('#left');
 const rightArrow = document.querySelector('#right');
 const instruction = document.querySelector('.instruction')
 const menuButton = document.querySelector('#back');
+const roomRight = document.querySelector('#rightArrow');
+const roomLeft = document.querySelector('#leftArrow');
 
 const tutorial = {
     1 : "Utilise les flèches pour explorer la maison",
@@ -25,6 +27,8 @@ async function fadeInBackground() {
     for (let opacity = 0; opacity <= 1; opacity += 0.01) {
         await delay(15);
         menuButton.style.opacity = opacity;
+        roomLeft.style.opacity = opacity;
+        roomRight.style.opacity = opacity;
     }
 }
 
@@ -41,6 +45,8 @@ async function fadeOut() {
         await delay(15);
         menuButton.style.opacity = opacity;
         instructionBox.style.opacity = opacity;
+        roomLeft.style.opacity = opacity;
+        roomRight.style.opacity = opacity;
     }
     background.style.display = 'block';
     for (let opacity = 0; opacity <= 1; opacity += 0.01) {

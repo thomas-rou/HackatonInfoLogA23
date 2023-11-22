@@ -12,13 +12,13 @@
 </head>
 <body>
     <img id="img" src="assets/png/garage/0.png" alt="Garage Image">
-    <div id="container">
-        <div class="side-containers" onclick="switchView('left')">
-            <div class="arrows"> &#9665; </div>
-        </div>
-        <div class="side-containers" onclick="switchView('right')">
-            <div class="arrows"> &#9655; </div>
-        </div>
+    <div id="container"></div>
+    
+    <div class="room-view" onclick="switchView('left')">
+        <div id="leftArrow"> &#9665; </div>
+    </div>
+    <div class="room-view" onclick="switchView('right')">
+        <div id="rightArrow"> &#9655; </div>
     </div>
 
 </body>

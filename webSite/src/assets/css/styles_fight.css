@@ -3,7 +3,7 @@ body {
     text-align: center;
     margin: 0;
     color: #FFFFF4;
-    border: 15px solid black; 
+    border: 15px solid black;
 }
 
 body::before {
@@ -32,7 +32,7 @@ body::before {
 #main > article {
     flex: 1;
 }
-#main > nav, 
+#main > nav,
 #main > aside {
     flex: 0 0 20vw;
 }
@@ -51,11 +51,11 @@ header, footer {
 }
 
 header {
-    border-bottom: solid black; 
+    border-bottom: solid black;
 }
 
 footer {
-    border-top: 5px solid black; 
+    border-top: 5px solid black;
 }
 
 h2 {
@@ -113,7 +113,7 @@ h2 {
 
 /*patternGame*/
 .color-button {
-    width: 15vw;   
+    width: 15vw;
     height: 15vw;
 }
 
@@ -133,8 +133,8 @@ h2 {
     border-radius: 100%;
 }
 
-#yellow { 
-    background-color: #FFBE0B; 
+#yellow {
+    background-color: #FFBE0B;
     border-radius: 100%;
 }
 #purple {

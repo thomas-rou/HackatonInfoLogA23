@@ -84,7 +84,7 @@ function displayBackground(){
   const urlParams = new URLSearchParams(window.location.search);
   const room = urlParams.get("roomName");
   const view = urlParams.get("viewIndex");
-  
+
   const newBackgroundImageURL = `url(../png/${room}/${view}.png)`;
   body.style.setProperty('--before-background-image', newBackgroundImageURL);
 }

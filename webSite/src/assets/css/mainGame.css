@@ -3,6 +3,8 @@
 }
 
 body {
+    background-color: black;
+    min-height: 100vh;
     margin: 0;
     background-color: var(--main-bg);
     background-image: url("../png/garage/0.png");

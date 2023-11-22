@@ -5,11 +5,11 @@ const images = ['0_light.png', '1_light.png', '2_light.png', '3_light.png'];
 let house;
 
 let monsterLocation = {
-    "roomIndex": null,
-    "viewIndex": null,
-    "position": null,
-    "monsterIndex": null
-};
+    "room": 0,
+    "view": 0,
+    "location": null,
+    "monsterIndex": 0
+}
 
 const newUser = {
     "room" : 2,
@@ -19,6 +19,7 @@ const newUser = {
 
 let user = newUser;
 
+// Preload images
 let imageObjects = []
 
 function generateImgRoom() {
@@ -33,6 +34,7 @@ function generateImgRoom() {
 function generateView(){
     removeDoor();
     removeMonster();
+    removeObjects();
 
     //Change image
     const imgElement = document.getElementById('front-image');
@@ -41,9 +43,9 @@ function generateView(){
 
 
     // Add monster
-    if (user.room === monsterLocation.roomIndex && user.view === monsterLocation.viewIndex) {
-        let position = monsterLocation.position;
-        addMonster(position.x, position.y, position.height, position.width);
+    if (user.room === monsterLocation.room && user.view === monsterLocation.view) {
+        let location = monsterLocation.location;
+        addMonster(location.x, location.y, location.height, location.width);
     }
 
     // Add door
@@ -76,11 +78,18 @@ function updateContainerSize() {
     const container = document.getElementById('container');
 
     // Set the container size based on the image size
-    container.style.width = image.width + 'px';
-    container.style.height = image.height + 'px';
+    container.style.width = image.width + 'vw';
+    container.style.height = image.height + 'vh';
 }
 
 function removeMonster() {
+    let monsterImg = document.getElementById("monster");
+    if (monsterImg) {
+        monsterImg.parentNode.removeChild(monsterImg);
+    }
+}
+
+function removeObjects() {
     let monsterImg = document.getElementById("monster");
     if (monsterImg) {
         monsterImg.parentNode.removeChild(monsterImg);
@@ -130,22 +139,24 @@ function generateDoor(x, y, roomIndex, view){
 
 function generateMonster() {
     let randomRoom = Math.floor(Math.random() * house.length);
-    let roomObject = house[randomRoom];
-    let randomView = Math.floor(Math.random() * roomObject.views.length);
-    let viewObject = roomObject.views[randomView];
-    let randomPosition = Math.floor(Math.random() * viewObject.locations.length);
-    let positionObject = viewObject.locations[randomPosition];
+    let room = house[randomRoom];
+    let randomView = Math.floor(Math.random() * room.views.length);
+    let view = room.views[randomView];
+    let randomLocation = Math.floor(Math.random() * view.locations.length);
+    let location = view.locations[randomLocation]
+    location.monster = true;
 
-    let randomMonster = Math.floor(Math.random() * 5 + 1); // hardcoded
+    let monsterIndex = Math.floor(Math.random() * 5 + 1);
+    monsterLocation.monsterIndex = monsterIndex;
 
-    monsterLocation.roomIndex = randomRoom;
-    monsterLocation.viewIndex = randomView;
-    monsterLocation.position = positionObject;
-    monsterLocation.monsterIndex = randomMonster;
+    monsterLocation.location = location;
+    monsterLocation.room = randomRoom;
+    monsterLocation.view = randomView;
 }
 
 function addMonster(x, y, width, height) {
 
+    // Create a new img element
     let monsterImg = document.createElement("img");
 
     // Set attributes for the monster image
@@ -153,13 +164,13 @@ function addMonster(x, y, width, height) {
     monsterImg.alt = "Monster Image";
     monsterImg.id = "monster";
 
-    // Set the size of the monster image
-    monsterImg.style.height =  Math.min(width, height) * 8/10 + "%"; // Adjust the width as needed
-
+     // Set the size of the monster image
+     monsterImg.style.width = 8 + "%"; // Adjust the width as needed
+    
     // Set the style attributes to position the monster based on x and y values
     monsterImg.style.position = "absolute";
-    monsterImg.style.left = (x + width / 2) + "%";
-    monsterImg.style.top = (y + height / 2) + "%";
+    monsterImg.style.left = x + "%";
+    monsterImg.style.top = y + "%";
 
     // Attach a click event listener to the monster image
     monsterImg.addEventListener("click", function() {
@@ -186,7 +197,7 @@ function addMonster(x, y, width, height) {
     });
 
     // Append the monster image to the body
-    document.getElementByID("container").appendChild(monsterImg);
+    document.getElementById("container").appendChild(monsterImg); 
 }
 
 async function fetchData() {
@@ -206,6 +217,107 @@ async function fetchData() {
                 reject(error);
             });
     });
+}
+
+function makeDraggable() {
+    const draggableBox = document.getElementById('draggableBox');
+
+    let isDragging = false;
+    let initialObjectXpos, initialXpos;
+    let initialObjectYpos, initialYpos;
+
+    draggableBox.addEventListener('mousedown', (e) => {
+        isDragging = true;
+
+        initialObjectXpos = draggableBox.offsetLeft;
+        initialObjectYpos = draggableBox.offsetTop;
+
+        initialXpos = e.clientX
+        initialYpos = e.clientY
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            const xDiff = e.clientX - initialXpos;
+            const yDiff = e.clientY - initialYpos;
+
+            draggableBox.style.left = `${initialObjectXpos + xDiff}px`;
+            draggableBox.style.top = `${initialObjectYpos + yDiff}px`;
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+}
+
+function makeDraggableRightOnly() {
+    const tireImg = document.getElementById('tire');
+    const draggableBox = document.getElementsByClassName('draggable')[0]; // objet invisible entourant l'endroit de la sélection
+
+    let isDragging = false;
+    let inEvidence = 0;
+    let initialObjectXpos, initialXpos;
+
+
+    draggableBox.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        inEvidence++;
+        checkEvidence();
+        initialObjectXpos = 0.5;
+        initialXpos = e.clientX;
+    });
+
+    draggableBox.addEventListener('mouseover', (e) => {
+        inEvidence++;
+        checkEvidence();
+    });
+
+    draggableBox.addEventListener('mouseleave', (e) => {
+        inEvidence--;
+        checkEvidence();
+    })
+
+    const mouseupHandler =  () => {
+        isDragging = false;
+        inEvidence--;
+        checkEvidence();
+        tireImg.style.left = `${initialObjectXpos * 100}%`;
+    };
+
+    const mousemoveHandler = (e) => {
+        if (isDragging) {
+            const xDiff = (e.clientX - initialXpos) / window.innerWidth;
+            const maxOffset = draggableBox.clientWidth / window.innerWidth * 100;
+            if (initialObjectXpos + xDiff >= initialObjectXpos) {
+                if (initialObjectXpos * 100 + maxOffset <= (initialObjectXpos + xDiff) * 100) {
+                    tireImg.style.left = `${initialObjectXpos * 100 + maxOffset}%`;
+                    document.removeEventListener('mousemove', mousemoveHandler);
+                    document.removeEventListener('mouseup', mouseupHandler)
+                    window.location.href = "typing.html"; // TEMPORARY
+                } else { 
+                    tireImg.style.left = `${(initialObjectXpos + xDiff) * 100}%`;
+                }
+            } else {
+                tireImg.style.left = `${initialObjectXpos * 100}%`;
+            }
+        }
+    };
+
+    document.addEventListener('mousemove', mousemoveHandler);
+    document.addEventListener('mouseup', mouseupHandler);
+
+
+    function checkEvidence()
+    {
+        if (inEvidence <= 0)
+        {
+            inEvidence = 0;
+            tireImg.style.filter = 'brightness(100%)';
+        } else {
+            tireImg.style.filter = 'brightness(150%)';
+        }
+    }
 }
 
 // Initial update on page load

@@ -37,13 +37,14 @@ body {
       mask: url("#cursorMask");
   }
 
-  .monster {
+  #monster {
       position: absolute;
       top: 50%;
       left: 50%;
       width: 5%;
       height: auto;
       z-index: 0;
+      transition: transform 0.3s ease-in-out;
   }
 
 .side-containers {
@@ -69,4 +70,9 @@ body {
 
 .side-containers.right {
     right: 1vw;
+}
+
+#monster:hover::after {
+    z-index: 3;
+    transform: scale(1.2);
 }

@@ -1,4 +1,4 @@
-const background = document.querySelector('#bedroom');
+const background = document.querySelector('#mask');
 const instructionBox = document.querySelector('.instructions-container');
 const leftArrow = document.querySelector('#left');
 const rightArrow = document.querySelector('#right');
@@ -8,7 +8,7 @@ const menuButton = document.querySelector('#back');
 const tutorial = {
     1 : "Utilise les flèches pour explorer la maison",
     2 : "Utilise la lampe de poche pour trouver tous les monstres cachés dans la pièce",
-    3 : "Combat chaque monstre trouvé en réussissant un mini jeu",
+    3 : "Cliquer sur chaque monstre trouvé et combat les en réussissant un mini jeu",
     4 : "Gagne la partie après avoir vaincu tous les 3 monstres!"
 }
 
@@ -17,11 +17,13 @@ async function delay(ms) {
 }
 
 async function fadeInBackground() {
-    background.style.opacity = 0;
-    menuButton.style.opacity = 0;
-    for (let opacity = 0; opacity <= 1; opacity += 0.01) {
+    for (let opacity = 1; opacity >= 0; opacity -= 0.01) {
         await delay(15);
         background.style.opacity = opacity;
+    }
+    background.style.display = 'none';
+    for (let opacity = 0; opacity <= 1; opacity += 0.01) {
+        await delay(15);
         menuButton.style.opacity = opacity;
     }
 }
@@ -37,9 +39,13 @@ async function fadeInTutorial() {
 async function fadeOut() {
     for (let opacity = 1; opacity >= 0; opacity -= 0.01) {
         await delay(15);
-        background.style.opacity = opacity;
         menuButton.style.opacity = opacity;
         instructionBox.style.opacity = opacity;
+    }
+    background.style.display = 'block';
+    for (let opacity = 0; opacity <= 1; opacity += 0.01) {
+        await delay(15);
+        background.style.opacity = opacity;
     }
 }
 
@@ -80,3 +86,21 @@ function next() {
     }
     instruction.querySelector('p').innerText = tutorial[nextSequence];
 }
+
+function searchLight(){
+    window.addEventListener("load", function() {
+        const img = document.getElementsByTagName("image")[0];
+        const imgPos = img.getBoundingClientRect();
+        const imgX = imgPos.left;
+        const imgY = imgPos.top;
+        const circle = document.getElementsByTagName("circle")[0];
+        img.addEventListener("mousemove", function(e) {
+            circle.setAttribute("cx", e.clientX - imgX);
+            circle.setAttribute("cy", e.clientY - imgY);
+            img.style.setProperty("--cursorX", e.clientX - imgX);
+            img.style.setProperty("--cursorY", e.clientY - imgY);
+            }, false);
+    }, false);
+    }
+    
+    searchLight();

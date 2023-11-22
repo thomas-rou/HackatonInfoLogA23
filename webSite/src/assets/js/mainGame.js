@@ -33,7 +33,6 @@ function generateImgRoom() {
 function generateView(){
     removeDoor();
     removeMonster();
-    removeObjects();
 
     //Change image
     const imgElement = document.getElementById('image');
@@ -69,10 +68,10 @@ function switchView(direction){
 // Function to update container size
 function updateContainerSize() {
     // Get the image element
-    var image = document.getElementById('img');
+    const image = document.getElementById('front-image');
 
     // Get the container element
-    var container = document.getElementById('container');
+    const container = document.getElementById('container');
 
     // Set the container size based on the image size
     container.style.width = image.width + 'px';
@@ -80,13 +79,6 @@ function updateContainerSize() {
 }
 
 function removeMonster() {
-    let monsterImg = document.getElementById("monster");
-    if (monsterImg) {
-        monsterImg.parentNode.removeChild(monsterImg);
-    }
-}
-
-function removeObjects() {
     let monsterImg = document.getElementById("monster");
     if (monsterImg) {
         monsterImg.parentNode.removeChild(monsterImg);
@@ -192,7 +184,7 @@ function addMonster(x, y, width, height) {
     });
 
     // Append the monster image to the body
-    document.getElementByTagName("body").appendChild(monsterImg);
+    document.getElementByID("container").appendChild(monsterImg);
 }
 
 async function fetchData() {
@@ -212,107 +204,6 @@ async function fetchData() {
                 reject(error);
             });
     });
-}
-
-function makeDraggable() {
-    const draggableBox = document.getElementById('draggableBox');
-
-    let isDragging = false;
-    let initialObjectXpos, initialXpos;
-    let initialObjectYpos, initialYpos;
-
-    draggableBox.addEventListener('mousedown', (e) => {
-        isDragging = true;
-
-        initialObjectXpos = draggableBox.offsetLeft;
-        initialObjectYpos = draggableBox.offsetTop;
-
-        initialXpos = e.clientX
-        initialYpos = e.clientY
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-            const xDiff = e.clientX - initialXpos;
-            const yDiff = e.clientY - initialYpos;
-
-            draggableBox.style.left = `${initialObjectXpos + xDiff}px`;
-            draggableBox.style.top = `${initialObjectYpos + yDiff}px`;
-        }
-    });
-
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-    });
-}
-
-function makeDraggableRightOnly() {
-    const tireImg = document.getElementById('tire');
-    const draggableBox = document.getElementsByClassName('draggable')[0]; // objet invisible entourant l'endroit de la sélection
-
-    let isDragging = false;
-    let inEvidence = 0;
-    let initialObjectXpos, initialXpos;
-
-
-    draggableBox.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        inEvidence++;
-        checkEvidence();
-        initialObjectXpos = 0.5;
-        initialXpos = e.clientX;
-    });
-
-    draggableBox.addEventListener('mouseover', (e) => {
-        inEvidence++;
-        checkEvidence();
-    });
-
-    draggableBox.addEventListener('mouseleave', (e) => {
-        inEvidence--;
-        checkEvidence();
-    })
-
-    const mouseupHandler =  () => {
-        isDragging = false;
-        inEvidence--;
-        checkEvidence();
-        tireImg.style.left = `${initialObjectXpos * 100}%`;
-    };
-
-    const mousemoveHandler = (e) => {
-        if (isDragging) {
-            const xDiff = (e.clientX - initialXpos) / window.innerWidth;
-            const maxOffset = draggableBox.clientWidth / window.innerWidth * 100;
-            if (initialObjectXpos + xDiff >= initialObjectXpos) {
-                if (initialObjectXpos * 100 + maxOffset <= (initialObjectXpos + xDiff) * 100) {
-                    tireImg.style.left = `${initialObjectXpos * 100 + maxOffset}%`;
-                    document.removeEventListener('mousemove', mousemoveHandler);
-                    document.removeEventListener('mouseup', mouseupHandler)
-                    window.location.href = "typing.html"; // TEMPORARY
-                } else {
-                    tireImg.style.left = `${(initialObjectXpos + xDiff) * 100}%`;
-                }
-            } else {
-                tireImg.style.left = `${initialObjectXpos * 100}%`;
-            }
-        }
-    };
-
-    document.addEventListener('mousemove', mousemoveHandler);
-    document.addEventListener('mouseup', mouseupHandler);
-
-
-    function checkEvidence()
-    {
-        if (inEvidence <= 0)
-        {
-            inEvidence = 0;
-            tireImg.style.filter = 'brightness(100%)';
-        } else {
-            tireImg.style.filter = 'brightness(150%)';
-        }
-    }
 }
 
 // Initial update on page load
@@ -347,8 +238,6 @@ window.onload = () => {
     .catch(error => {
         console.error('Error in fetchData:', error);
     });
-
-    makeDraggableRightOnly()
 };
 
 // Update container size on window resize

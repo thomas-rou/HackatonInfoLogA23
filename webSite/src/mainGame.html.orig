@@ -13,8 +13,9 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     <div class="main-container">
-      <svg id="svg">
+      <svg>
             <mask id="cursorMask" maskUnits="objectBoundingBox" maskContentUtils="objectBoundingBox">
                 <rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF" />
                 <circle cx="0" cy="0" r="15vw" fill="#000000" />
@@ -24,12 +25,20 @@
     </div>
     <div id="container" class="front">
         <div class="side-containers left" onclick="switchView('left')">
-            <div class="arrows"> &#9665; </div>
+            <div> gauche </div>
         </div>
         <div class="side-containers right" onclick="switchView('right')">
-            <div class="arrows"> &#9655; </div>
+            <div> droite </div>
+=======
+    <img id="img" src="assets/png/garage/0.png" alt="Garage Image">
+    <div id="container">
+        <div class="side-containers" onclick="switchView('left')">
+            <div class="arrows"> &#9665; </div>
         </div>
+        <div class="side-containers" onclick="switchView('right')">
+            <div class="arrows"> &#9655; </div>
+>>>>>>> main
+        </div>
+        <!-- <img src="./assets/png/monster/monster_1.png" alt="monster" class="monster" id="monster"> -->
     </div>
-
 </body>
-</html>

@@ -25,7 +25,7 @@ function generateImgRoom() {
     imageObjects = [];
     for (let i = 0; i < house[user.room].views.length; i++) {
         const image = new Image();
-        image.src = `assets/png/${house[user.room].name}/${i}.png`;   
+        image.src = `assets/png/${house[user.room].name}/${i}.png`;
         imageObjects.push(image)
     }
 }
@@ -45,7 +45,7 @@ function generateView(){
         addMonster(position.x, position.y, position.height, position.width);
     }
 
-    // Add door 
+    // Add door
     const doors = house[user.room].views[user.view].doors;
     if (doors) {
         doors.forEach(function(door) {
@@ -100,7 +100,7 @@ function removeDoor(){
 
         doorsArray.forEach(function(door) {
             door.parentNode.removeChild(door);
-        });   
+        });
     }
 }
 
@@ -108,7 +108,7 @@ function generateDoor(x, y, roomIndex, view){
      // Create a div element
      var iconElement = document.createElement('iconify-icon');
      iconElement.classList.add("door");
- 
+
 
      // Set the x and y position of the icon
      iconElement.style.position = 'absolute';
@@ -129,9 +129,9 @@ function generateDoor(x, y, roomIndex, view){
         generateImgRoom()
         generateView();
      });
- 
+
      // Append the monster image to the body
-     document.getElementById("container").appendChild(iconElement); 
+     document.getElementById("container").appendChild(iconElement);
 }
 
 function generateMonster() {
@@ -161,7 +161,7 @@ function addMonster(x, y, width, height) {
 
     // Set the size of the monster image
     monsterImg.style.height =  Math.min(width, height) * 8/10 + "%"; // Adjust the width as needed
-    
+
     // Set the style attributes to position the monster based on x and y values
     monsterImg.style.position = "absolute";
     monsterImg.style.left = (x + width / 2) + "%";
@@ -185,14 +185,14 @@ function addMonster(x, y, width, height) {
 
         // Delay the navigation by 100 milliseconds (adjust as needed)
         setTimeout(function() {
-            
-            window.location.href = miniGamePath + "?monsterIndex=" + encodeURIComponent(monsterLocation.monsterIndex) 
+
+            window.location.href = miniGamePath + "?monsterIndex=" + encodeURIComponent(monsterLocation.monsterIndex)
             + "&roomName=" + encodeURIComponent(house[user.room].name) + "&viewIndex=" + encodeURIComponent(user.view);
         }, 10);
     });
 
     // Append the monster image to the body
-    document.getElementById("container").appendChild(monsterImg); 
+    document.getElementById("container").appendChild(monsterImg);
 }
 
 async function fetchData() {
@@ -290,7 +290,7 @@ function makeDraggableRightOnly() {
                     document.removeEventListener('mousemove', mousemoveHandler);
                     document.removeEventListener('mouseup', mouseupHandler)
                     window.location.href = "typing.html"; // TEMPORARY
-                } else { 
+                } else {
                     tireImg.style.left = `${(initialObjectXpos + xDiff) * 100}%`;
                 }
             } else {
@@ -336,7 +336,7 @@ window.onload = () => {
         if(user.monster >= 3){
             let userJSON = JSON.stringify(newUser);
             sessionStorage.setItem("userData", userJSON);
-            
+
             window.location.href = "endStory.html"
         }
 

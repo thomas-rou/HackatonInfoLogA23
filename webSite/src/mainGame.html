@@ -6,11 +6,34 @@
     <title>Chasseur de monstres</title>
     <link rel="stylesheet" href="assets/css/mainGame.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="./assets/js/SearchLight.js" defer></script>
     <script src="assets/json/house.json" defer></script>
     <script src="assets/js/mainGame.js" defer></script>
 
 </head>
+
 <body>
+    <div class="main-container">
+      <svg>
+            <mask id="cursorMask" maskUnits="objectBoundingBox" maskContentUtils="objectBoundingBox">
+                <rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF" />
+                <circle cx="0" cy="0" r="10vw" fill="#000000" />
+            </mask>
+          <image href="./assets/png/garage/0.png" id="front-image" class="front"/>
+      </svg>
+    </div>
+    <div id="container" class="front">
+    <div class="side-containers left" onclick="switchView('left')">
+        <div> gauche </div>
+    </div>
+        <div class="side-containers right" onclick="switchView('right')">
+            <div> droite </div>
+        </div>
+    </div>
+    <img src="./assets/png/monster/monster_1.png" alt="monster" class="monster" id="monster">
+</body>
+
+<!-- <body>
     <img id="img" src="assets/png/garage/0.png" alt="Garage Image">
     <img id="tire" src="assets/png/garage/tire.png">
     <div id="container">
@@ -24,4 +47,4 @@
     </div>
 
 </body>
-</html>
+</html> -->

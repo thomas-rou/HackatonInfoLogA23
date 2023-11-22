@@ -8,7 +8,7 @@ let monsterLocation = {
 }
 
 const newUser = {
-    "room" : 2,
+    "room" : 0,
     "view" : 0,
     "monster" : 0
 }
@@ -42,6 +42,11 @@ function generateView(){
         addMonster(location.x, location.y, location.height, location.width);
     }
 
+    // Add object image
+    // const container = document.getElementById('container');
+    // console.log(house[user.room].views[user.view].locations[0].image); // hardcoded [0]
+    // container.appendChild()
+
     // Add door 
     const doors = house[user.room].views[user.view].doors;
     if (doors) {
@@ -61,7 +66,6 @@ function switchView(direction){
     }
     generateView();
 }
-
 
 // Function to update container size
 function updateContainerSize() {

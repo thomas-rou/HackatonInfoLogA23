@@ -1,1 +1,54 @@
-Tutorial!
+Tutorial!<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chasseur de monstres</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+    <script src="assets/js/tutorial.js" defer></script>
+
+</head>
+<body class="pageCenter" id="flashlight">
+    <div id="mask"></div>
+
+    <div class="room-view" onclick="switchView('left')">
+        <div id="leftArrow"> &#9665; </div>
+    </div>
+    <div class="room-view" onclick="switchView('right')">
+        <div id="rightArrow"> &#9655; </div>
+    </div>
+
+    <div class="main-container">
+        <svg>
+          <defs>
+                <mask id="cursorMask" maskUnits="objectBoundingBox" maskContentUtils="objectBoundingBox">
+                    <rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF" />
+                    <circle cx="0" cy="0" r="5vw" fill="#000000" />
+                </mask>
+          </defs>
+            <image href="./assets/png/bedroom/1.png" id="front-image"/>
+        </svg>
+      </div>
+      <img src="./assets/png/monster/monster_1.png" alt="monster" class="monster" id="monster">
+    </div>
+
+    <div class="container" id="back">
+        <div id="backButton"> &#9665; </div>
+        <p>Retour au menu</p>
+    </div>
+
+    <div class="instructions-container">
+        <div class="side-containers" onclick="previous()">
+            <div id="left"> &#9665; </div>
+        </div>
+        <div class="instruction" data-sequence="1">
+            <p>Utilise les flèches pour explorer la maison</p>
+        </div>
+        <div class="side-containers" onclick="next()">
+            <div id="right"> &#9655; </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -34,7 +34,6 @@ function generateImgRoom() {
 function generateView(){
     removeDoor();
     removeMonster();
-    removeObjects();
 
     //Change image
     const imgElement = document.getElementById('front-image');
@@ -83,13 +82,6 @@ function updateContainerSize() {
 }
 
 function removeMonster() {
-    let monsterImg = document.getElementById("monster");
-    if (monsterImg) {
-        monsterImg.parentNode.removeChild(monsterImg);
-    }
-}
-
-function removeObjects() {
     let monsterImg = document.getElementById("monster");
     if (monsterImg) {
         monsterImg.parentNode.removeChild(monsterImg);
@@ -163,43 +155,39 @@ function addMonster(x, y, width, height) {
     monsterImg.src = `./assets/png/monster/monster_${monsterLocation.monsterIndex}.png`; // Replace with the actual path to your monster image
     monsterImg.alt = "Monster Image";
     monsterImg.id = "monster";
-    monsterImg.onclick = game();
 
-     // Set the size of the monster image
-     monsterImg.style.width = 8 + "%"; // Adjust the width as needed
+    // Set the size of the monster image
+    monsterImg.style.width = 8 + "%"; // Adjust the width as needed
 
     // Set the style attributes to position the monster based on x and y values
     monsterImg.style.position = "absolute";
     monsterImg.style.left = x + "%";
     monsterImg.style.top = y + "%";
-
-    // Attach a click event listener to the monster image
-    function game() {
-        // Convert the user object to a JSON string
-        user.monster++;
-        let userJSON = JSON.stringify(user);
-        sessionStorage.setItem("userData", userJSON);
-
-        let miniGameIndex = Math.floor(Math.random() * 2);
-        let miniGamePath = "";
-
-        if ( miniGameIndex === 0 ){
-            miniGamePath = "typing.html";
-        } else if ( miniGameIndex === 1 ) {
-            miniGamePath = "pattern.html";
-        }
-
-        // Delay the navigation by 100 milliseconds (adjust as needed)
-        setTimeout(function() {
-
-            window.location.href = miniGamePath + "?monsterIndex=" + encodeURIComponent(monsterLocation.monsterIndex)
-            + "&roomName=" + encodeURIComponent(house[user.room].name) + "&viewIndex=" + encodeURIComponent(user.view);
-        }, 10);
-    });
-
-    // Append the monster image to the body
-    document.getElementById("container").appendChild(monsterImg);
 }
+
+// Attach a click event listener to the monster image
+function game() {
+    // Convert the user object to a JSON string
+    user.monster++;
+    let userJSON = JSON.stringify(user);
+    sessionStorage.setItem("userData", userJSON);
+
+    let miniGameIndex = Math.floor(Math.random() * 2);
+    let miniGamePath = "";
+
+    if ( miniGameIndex === 0 ){
+        miniGamePath = "typing.html";
+    } else if ( miniGameIndex === 1 ) {
+        miniGamePath = "pattern.html";
+    }
+
+    // Delay the navigation by 100 milliseconds (adjust as needed)
+    setTimeout(function() {
+
+        window.location.href = miniGamePath + "?monsterIndex=" + encodeURIComponent(monsterLocation.monsterIndex)
+        + "&roomName=" + encodeURIComponent(house[user.room].name) + "&viewIndex=" + encodeURIComponent(user.view);
+    }, 10);
+};
 
 async function fetchData() {
     return new Promise((resolve, reject) => {

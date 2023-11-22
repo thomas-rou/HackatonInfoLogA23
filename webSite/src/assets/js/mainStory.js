@@ -197,4 +197,3 @@ document.addEventListener("DOMContentLoaded", function() {
         showNextSentence();
     }, storyFadeInTime);
 });
-

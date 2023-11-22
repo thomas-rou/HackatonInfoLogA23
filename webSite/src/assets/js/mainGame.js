@@ -25,7 +25,7 @@ function generateImgRoom() {
     imageObjects = [];
     for (let i = 0; i < house[user.room].views.length; i++) {
         const image = new Image();
-        image.src = `assets/png/${house[user.room].name}/${i}.png`;
+        image.href = `assets/png/${house[user.room].name}/${i}.png`;
         imageObjects.push(image)
     }
 }
@@ -35,8 +35,10 @@ function generateView(){
     removeMonster();
 
     //Change image
-    const imgElement = document.getElementById('image');
-    imgElement.href = imageObjects[user.view].src;
+    const imgElement = document.getElementById('front-image');
+    document.body.style.backgroundImage = `url(${imageObjects[user.view].href})`;
+    imgElement.href.baseVal = imageObjects[user.view].href;
+
 
     // Add monster
     if (user.room === monsterLocation.roomIndex && user.view === monsterLocation.viewIndex) {

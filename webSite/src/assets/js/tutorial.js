@@ -7,7 +7,7 @@ const menuButton = document.querySelector('#back');
 
 const tutorial = {
     1 : "Utilise les flèches pour explorer la maison",
-    2 : "Fais glisser des éléments surlignés pour trouver tous les monstres cachés dans la pièce",
+    2 : "clicque sur les monstres pour les combattre",
     3 : "Combat chaque monstre trouvé en réussissant un mini jeu",
     4 : "Gagne la partie après avoir vaincu tous les 3 monstres!"
 }
